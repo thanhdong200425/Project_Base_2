@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug');
             $table->string('content');
-            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned()->nullable();
             $table->timestamps();
             $table->engine = 'InnoDB';
         });

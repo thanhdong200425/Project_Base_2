@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Login_Token extends Model
 {
     use HasFactory;
+    protected $table = 'login_tokens';
+    protected $primaryKey = 'login_token_id';
+
     protected $fillable = [
-        'fullname',
-        'email',
-        'password',
-        'status',
-        'decentralization_id'
+        'token',
+        'user_id',
     ];
 }

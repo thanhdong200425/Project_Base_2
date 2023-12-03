@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Expert_Team extends Model
 {
     use HasFactory;
+    protected $table = 'expert_teams';
+    protected $primaryKey = 'team_id';
     protected $fillable = [
-        'fullname',
-        'email',
-        'password',
-        'status',
-        'decentralization_id'
+        'name'
     ];
+
 }

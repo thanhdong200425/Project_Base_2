@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_services', function (Blueprint $table) {
-            $table->bigInteger('service_id')->unsigned();
-            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('service_id')->unsigned()->nullable();
+            $table->bigInteger('user_id')->unsigned()->nullable();
             $table->tinyInteger('status')->comment('0: Pending, 1: Accepted, 2: Completed, 3: Rejected');
             $table->date('register_date');
-            $table->bigInteger('period_time_id')->unsigned();
+            $table->bigInteger('period_time_id')->unsigned()->nullable();
             $table->timestamps();
             $table->engine = 'InnoDB';
         });

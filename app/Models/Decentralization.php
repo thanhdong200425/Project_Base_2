@@ -5,14 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Decentralization extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'decentralization_id';
     protected $fillable = [
-        'fullname',
-        'email',
-        'password',
-        'status',
-        'decentralization_id'
+        'decentralization_name',
     ];
 }

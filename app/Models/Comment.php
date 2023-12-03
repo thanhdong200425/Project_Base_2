@@ -5,14 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Comment extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'comment_id';
     protected $fillable = [
-        'fullname',
-        'email',
-        'password',
-        'status',
-        'decentralization_id'
+        'name',
+        'content',
+        'parent_id',
+        'user_id',
+        'blog_id',
+        'status'
     ];
 }

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('thumbnail1');
             $table->string('thumbnail2');
             $table->string('thumbnail3');
-            $table->bigInteger('promotion_id')->unsigned();
+            $table->bigInteger('promotion_id')->unsigned()->nullable();
             $table->string('dimension');
             $table->string('color');
             $table->integer('evaluate_star');

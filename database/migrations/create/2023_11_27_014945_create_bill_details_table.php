@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('bill_details', function (Blueprint $table) {
-            $table->bigInteger('bill_id')->unsigned();
-            $table->bigInteger('product_id')->unsigned();
+            $table->bigInteger('bill_id')->unsigned()->nullable();
+            $table->bigInteger('product_id')->unsigned()->nullable();
             $table->integer('quantity');
             $table->float('price');
             $table->engine = 'InnoDB';

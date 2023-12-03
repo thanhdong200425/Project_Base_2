@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('login_tokens', function (Blueprint $table) {
-            $table->id('login_token_id');
-            $table->bigInteger('user_id')->unsigned()->nullable();
-            $table->string('token');
+        Schema::table('staff_positions', function (Blueprint $table) {
             $table->timestamps();
-            $table->engine = 'InnoDB';
         });
     }
 
@@ -25,6 +21,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('login_tokens');
+        //
     }
 };

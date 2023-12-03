@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id('blog_id');
             $table->string('title');
             $table->string('slug');
-            $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('category_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->bigInteger('category_id')->unsigned()->nullable();
             $table->text('content');
             $table->integer('view_count');
             $table->integer('comment_count');

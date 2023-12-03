@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id('comment_id');
             $table->string('name');
             $table->string('content');
-            $table->bigInteger('parent_id')->unsigned();
-            $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('blog_id')->unsigned();
+            $table->bigInteger('parent_id')->unsigned()->nullable();
+            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->bigInteger('blog_id')->unsigned()->nullable();
             $table->tinyInteger('status')->comment('0: Pending, 1: Approved, 2: Spam');
             $table->timestamps();
             $table->engine = 'InnoDB';

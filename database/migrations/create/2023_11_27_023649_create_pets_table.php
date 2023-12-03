@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('thumbnail');
             $table->text('description');
-            $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('pet_category_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->bigInteger('pet_category_id')->unsigned()->nullable();
             $table->string('origin');
             $table->string('other_names');
             $table->string('classify');

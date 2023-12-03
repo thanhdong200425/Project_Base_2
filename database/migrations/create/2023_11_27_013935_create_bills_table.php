@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id('bill_id');
-            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned()->nullable();
             $table->string('payment_method');
             $table->float('total_price');
             $table->dateTime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

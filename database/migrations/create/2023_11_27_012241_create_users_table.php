@@ -28,7 +28,7 @@ return new class extends Migration
             $table->text('forget_token')->nullable();
             $table->text('active_token')->nullable();
             $table->tinyInteger('status')->default(0);
-            $table->bigInteger('decentralization_id')->unsigned();
+            $table->bigInteger('decentralization_id')->unsigned()->nullable();
             $table->dateTime('last_active')->nullable();
             $table->timestamps();
             $table->engine = 'InnoDB';

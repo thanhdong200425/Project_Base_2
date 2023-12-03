@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->id('member_id');
-            $table->bigInteger('position_id')->unsigned();
+            $table->bigInteger('position_id')->unsigned()->nullable();
             $table->string('name');
             $table->tinyInteger('gender')->comment('0: Man, 1: Woman');
             $table->date('dob');
