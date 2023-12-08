@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use Illuminate\Http\Request;
+
+class UserController extends Controller
+{
+    public function index()
+    {
+        $users = User::all();
+        if ($users) {
+            return response()->json([
+                'status' => 200,
+                'users' => $users
+            ], 200);
+        }
+
+        return response()->json([
+                'status' => 500,
+                'message' => 'User not found'
+        ], 500);
+    }
+}
