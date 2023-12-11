@@ -31,9 +31,6 @@ class UserController extends Controller
             return response()->json([
                 'message' => "OK",
                 'user' => $user,
-                // 'session' => session([
-                //     'user' => $user
-                // ])
             ], 200);
         }
 
@@ -41,5 +38,26 @@ class UserController extends Controller
             'status' => 404,
             'message' => "User not found",
         ], 404);
+    }
+
+    public function sign_up(Request $request)
+    {
+        $user = DB::table('users')->insert([
+            'fullname' => $request->fullname,
+            'email' => $request->email,
+            'password' => $request->password,
+            'status' => 0
+        ]);
+
+        if($user) {
+            return response()->json([
+                'status' => 200,
+                'user' => $user
+            ],200);
+        }
+        return response()->json([
+            'status' => 400,
+            'message' => 'Something went wrong'
+        ], 400);
     }
 }
