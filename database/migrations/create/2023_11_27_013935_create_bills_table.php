@@ -18,6 +18,7 @@ return new class extends Migration
             $table->float('total_price');
             $table->dateTime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->integer('status')->default(0)->comment('0: Not pay, 1: Paid, 2: Cancel');
+            $table->tinyInteger('payment_status')->nullable()->default(0);
             $table->engine = 'InnoDB';
         });
     }

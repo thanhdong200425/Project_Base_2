@@ -17,8 +17,7 @@ class TimeworkingFactory extends Factory
     public function definition(): array
     {
         return [
-            'time_start' => $this->faker->time(),
-            'time_end'  => $this->faker->time()
+            
         ];
     }
 }

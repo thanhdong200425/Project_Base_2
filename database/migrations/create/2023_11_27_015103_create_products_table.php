@@ -14,11 +14,10 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id('product_id');
             $table->string('product_name');
+            $table->string('slug')->nullable();
             $table->float('price');
             $table->integer('quantity')->unsigned();
-            $table->string('thumbnail1');
             $table->string('thumbnail2');
-            $table->string('thumbnail3');
             $table->bigInteger('promotion_id')->unsigned()->nullable();
             $table->string('dimension');
             $table->string('color');
@@ -26,6 +25,8 @@ return new class extends Migration
             $table->integer('evaluate_count');
             $table->text('description');
             $table->integer('status')->unsigned()->comment('0: inactive, 1: active');
+            $table->text('ingredient')->nullable();
+            $table->string('origin')->nullable();
             $table->timestamps();
             $table->engine = 'InnoDB';
         });

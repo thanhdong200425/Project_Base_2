@@ -19,7 +19,7 @@ class PromotionFactory extends Factory
         return [
             'name' => $this->faker->name,
             'type' => $this->faker->randomElement(['fixed', 'percent']),
-            'value' => $this->faker->randomElement([100000,200000,300000,400000,500000,600000,700000,800000,900000,1000000]), 
+            'value' => $this->faker->randomElement([1000,2000,3000,4000,5000,6000,7000,8000,9000,10000]), 
             'status' => $this->faker->randomElement([0,1])
         ];
     }

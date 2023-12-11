@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('timeworkings', function (Blueprint $table) {
-            $table->id('timeworking_id')->nullable();
-            $table->string('timeworking')->nullable();
+        Schema::create('carts', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('productid')->nullable()->unsigned();
+            $table->bigInteger('userid')->nullable()->unsigned();
+            $table->integer('quantity')->nullable();
+            $table->float('price')->nullable();
         });
     }
 
@@ -22,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('timeworkings');
+        Schema::dropIfExists('cart');
     }
 };

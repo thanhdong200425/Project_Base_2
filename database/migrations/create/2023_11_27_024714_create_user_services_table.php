@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('user_services', function (Blueprint $table) {
             $table->bigInteger('service_id')->unsigned()->nullable();
             $table->bigInteger('user_id')->unsigned()->nullable();
-            $table->tinyInteger('status')->comment('0: Pending, 1: Accepted, 2: Completed, 3: Rejected');
+            $table->tinyInteger('status')->comment('0: Pending, 1: Accepted, 2: Rejected, 3: Completed');
+            $table->tinyInteger('payment_status')->nullable()->default(0)->comment('0: Not payment, 1: Paymented');
             $table->date('register_date');
             $table->bigInteger('period_time_id')->unsigned()->nullable();
             $table->timestamps();

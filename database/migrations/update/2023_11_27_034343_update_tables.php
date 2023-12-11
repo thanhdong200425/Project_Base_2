@@ -20,7 +20,7 @@ return new class extends Migration {
         Schema::table('bill_details', function (Blueprint $table) {
             $table->foreign('bill_id')->references('bill_id')->on('bills')->onDelete('cascade');
             $table->foreign('product_id')->references('product_id')->on('products')->onDelete('cascade');
-            $table->primary(['bill_id', 'product_id']);
+            $table->primary('billdetail_id');
         });
 
         Schema::table('products', function (Blueprint $table) {
@@ -69,6 +69,11 @@ return new class extends Migration {
         Schema::table('blogs', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('category_id')->references('category_id')->on('blog_categories')->onDelete('cascade');
+        });
+
+        Schema::table('carts', function (Blueprint $table) {
+            $table->foreign('productid')->references('product_id')->on('products')->onDelete('cascade');
+            $table->foreign('userid')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
