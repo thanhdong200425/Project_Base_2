@@ -40,24 +40,33 @@ class UserController extends Controller
         ], 404);
     }
 
+
     public function sign_up(Request $request)
     {
-        $user = DB::table('users')->insert([
-            'fullname' => $request->fullname,
-            'email' => $request->email,
-            'password' => $request->password,
-            'status' => 0
-        ]);
+        if ($request->password === $request->confirm_password) {
+            $user = DB::table('users')->insert([
+                'fullname' => $request->fullname,
+                'email' => $request->email,
+                'password' => $request->password,
+                'status' => 0
+            ]);
 
-        if($user) {
+            if ($user) {
+                return response()->json([
+                    'status' => 200,
+                    'message' => "Added"
+                ],200);
+            }
+
             return response()->json([
-                'status' => 200,
-                'user' => $user
-            ],200);
+                'status' => 400,
+                'message' => 'Error when add'
+            ], 400);
         }
+
         return response()->json([
             'status' => 400,
-            'message' => 'Something went wrong'
-        ], 400);
+            'message' => "Password must be match"
+        ]);
     }
 }
