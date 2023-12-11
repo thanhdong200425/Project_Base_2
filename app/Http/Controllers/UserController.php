@@ -18,8 +18,30 @@ class UserController extends Controller
         }
 
         return response()->json([
-                'status' => 500,
-                'message' => 'User not found'
+            'status' => 500,
+            'message' => 'User not found'
         ], 500);
     }
+
+    public function sign_in(Request $request)
+    {
+        $validationData = $request->validate([
+            'email' => ['required', 'unique:users,email'],
+            'password' => ['required']
+        ]);
+
+        if ($validationData) {
+            $user = User::where('email', '=', $request->email)->get();
+            return response()->json([
+                'user' => $user
+            ], 200);
+        }
+
+        return response()->json([
+            'status' => 404,
+            'message' => 'User not found'
+        ], 404);
+    }
+
+    
 }

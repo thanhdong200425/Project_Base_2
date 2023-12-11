@@ -21,7 +21,7 @@ class MemberFactory extends Factory
             'name' => $this->faker->name(),
             'gender' => $this->faker->randomElement([0,1]),
             'dob' => $this->faker->date(),
-            'phone' => $this->faker->phoneNumber(),
+            'phone' => $this->faker->randomElement([0,1]),
             'email' => $this->faker->unique()->safeEmail(),
             'avatar' => $this->faker->imageUrl(),
             'description' => $this->faker->text(),
