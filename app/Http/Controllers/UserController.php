@@ -26,35 +26,20 @@ class UserController extends Controller
 
     public function sign_in(Request $request)
     {
-        $validationData = $request->validate([
-            'email' => ['required', 'unique:users,email'],
-            'password' => ['required']
-        ]);
-
-        if ($validationData) {
-            $user = User::where('email', $request->email)->get();
-            if ($user->count() > 0) {
-                return response()->json([
-                    'message' => "OK",
-                    'user' => $user,
-                    // 'session' => session([
-                    //     'user' => $user
-                    // ])
-                ], 200);
-            }
-
+        $user = User::where('email', $request->email)->get();
+        if ($user->count() > 0) {
             return response()->json([
-                'status' => 404,
-                'message' => "User not found"
-            ],404);
+                'message' => "OK",
+                'user' => $user,
+                // 'session' => session([
+                //     'user' => $user
+                // ])
+            ], 200);
         }
 
         return response()->json([
-            'status' => 401,
-            'message' => $validationData
-        ], 401);
+            'status' => 404,
+            'message' => "User not found",
+        ], 404);
     }
-
-
-
 }
