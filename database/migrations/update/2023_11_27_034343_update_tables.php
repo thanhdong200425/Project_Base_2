@@ -47,17 +47,17 @@ return new class extends Migration {
         });
 
         Schema::table('services', function (Blueprint $table) {
-            $table->foreign('team_id')->references('team_id')->on('expert_teams')->onDelete('cascade');
+            $table->foreign('team_id')->references('position_id')->on('staff_positions')->onDelete('cascade');
         });
 
-        Schema::table('members', function(Blueprint $table) {
-            $table->foreign('position_id')->references('position_id')->on('staff_positions')->onDelete('cascade');
-        });
-        
-        Schema::table('member_teams', function(Blueprint $table) {
-            $table->foreign('team_id')->references('team_id')->on('expert_teams')->onDelete('cascade');
-            $table->foreign('member_id')->references('member_id')->on('members')->onDelete('cascade');
-            $table->primary(['team_id', 'member_id']);
+//        Schema::table('staff_teams', function(Blueprint $table) {
+//            $table->foreign('team_id')->references('team_id')->on('expert_teams')->onDelete('cascade');
+//            $table->foreign('staff_position_id')->references('staff_position_id')->on('staff_positions')->onDelete('cascade');
+//            $table->primary(['team_id', 'staff_position_id']);
+//        });
+
+        Schema::table('expert_teams', function (Blueprint $table) {
+            $table->foreign('team_id')->references('position_id')->on('staff_positions')->onDelete('cascade');
         });
 
         Schema::table('comments', function (Blueprint $table) {
@@ -72,7 +72,7 @@ return new class extends Migration {
         });
 
         Schema::table('carts', function (Blueprint $table) {
-            $table->foreign('productid')->references('product_id')->on('products')->onDelete('cascade');
+            $table->foreign('product_id')->references('product_id')->on('products')->onDelete('cascade');
             $table->foreign('userid')->references('id')->on('users')->onDelete('cascade');
         });
     }

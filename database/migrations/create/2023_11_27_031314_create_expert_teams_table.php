@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('members', function (Blueprint $table) {
-            $table->id('member_id');
-            $table->bigInteger('position_id')->unsigned()->nullable();
+        Schema::create('expert_teams', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('team_id')->unsigned()->nullable();
             $table->string('name');
             $table->tinyInteger('gender')->comment('0: Man, 1: Woman');
             $table->date('dob');

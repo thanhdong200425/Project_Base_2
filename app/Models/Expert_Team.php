@@ -9,9 +9,19 @@ class Expert_Team extends Model
 {
     use HasFactory;
     protected $table = 'expert_teams';
-    protected $primaryKey = 'team_id';
+    protected $primaryKey = 'id';
     protected $fillable = [
-        'name'
+        'team_id',
+        'name',
+        'gender',
+        'dob',
+        'phone',
+        'email',
+        'avatar',
+        'description',
+        'pinterest',
+        'facebook',
+        'twitter',
+        'tiktok',
     ];
-
 }

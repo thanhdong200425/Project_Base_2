@@ -1,2 +1,15 @@
 Sign_in: http://127.0.0.1:8000/api/
+
 Sign_up: http://127.0.0.1:8000/api/sign-up
+
+Detail information of all pets: http://127.0.0.1:8000/api/pets
+
+Detail information of one pet: http://127.0.0.1:8000/api/pet/{id}
+
+Detail information of all services: http://127.0.0.1:8000/api/services
+
+Detail information of all expert teams: http://127.0.0.1:8000/api/expert_teams
+
+Get all the blogs (title, users.fullname content, category_name) followed by the category and user: http://127.0.0.1:8000/api/blogs_categories
+
+Update information of a user(only test for fullname): http://127.0.0.1:8000/api/user/update/4 (* Add fullname input with the request *)

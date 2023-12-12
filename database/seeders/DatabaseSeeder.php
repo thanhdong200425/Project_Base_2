@@ -22,7 +22,6 @@ class DatabaseSeeder extends Seeder
             Default_PageSeeder::class,
             Expert_TeamSeeder::class,
             Login_TokenSeeder::class,
-            MemberSeeder::class,
             PetSeeder::class,
             ProductSeeder::class,
             PromotionSeeder::class,
