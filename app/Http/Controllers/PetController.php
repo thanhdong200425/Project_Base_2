@@ -13,14 +13,14 @@ class PetController extends Controller
         $pets = Pet::all();
         if ($pets->count() <= 0) {
             return response()->json([
-                'status' => 204,
-                'Message' => 'No record found'
+                'status' => false,
+                'data' => 'No record found'
             ], 204);
         }
 
         return response()->json([
-            'status' => 200,
-            'pets' => $pets
+            'status' => true,
+            'data' => $pets
         ], 200);
     }
 
@@ -29,14 +29,14 @@ class PetController extends Controller
         $pet = Pet::where('pet_id', $request->id)->get();
         if ($pet->count() > 0):
             return response()->json([
-                'status' => 200,
-                'pet' => $pet
+                'status' => true,
+                'data' => $pet
             ], 200);
         endif;
 
         return response()->json([
-            'status' => 404,
-            'message' => 'Pet not found'
+            'status' => false,
+            'data' => 'Pet not found'
         ], 404);
     }
 }

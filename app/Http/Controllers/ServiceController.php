@@ -11,20 +11,19 @@ class ServiceController extends Controller
     public function getAll(): JsonResponse
     {
         $services = DB::table('services')
-            ->select('services.*', 'staff_positions.name as staff_position_name')
-            ->join('staff_positions', 'services.team_id', '=', 'staff_positions.position_id')
+            ->select('services.*', 'staff_position.name as staff_position_name')
+            ->join('staff_position', 'services.teamid', '=', 'staff_position.positionid')
             ->get();
 
         if ($services->count() <= 0):
             return response()->json([
-                'status' => 'error',
-                'message' => 'No service found'
+                'status' => false,
+                'data' => 'No service found'
             ], 404);
         endif;
 
         return response()->json([
-            'status' => 'success',
-            'message' => 'Get all services successfully',
+            'status' => true,
             'data' => $services
         ], 200);
     }

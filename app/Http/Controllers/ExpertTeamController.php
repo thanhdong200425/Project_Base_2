@@ -10,20 +10,20 @@ class ExpertTeamController extends Controller
 {
     public function getAll(): JsonResponse
     {
-        $expertTeams = DB::table('expert_teams')
-            ->join('staff_positions', 'expert_teams.team_id', '=', 'staff_positions.position_id')
-            ->select('staff_positions.name as staff_position_name', 'expert_teams.*')
+        $expertTeams = DB::table('expert_team')
+            ->join('staff_position', 'expert_team.positionid', '=', 'staff_position.positionid')
+            ->select('staff_position.name as staff_position_name', 'expert_team.*')
             ->get();
 
         if ($expertTeams->count() <= 0):
             return response()->json([
-                'status' => 'success',
-                'message' => 'Expert teams not found'
+                'status' => false,
+                'data' => 'Expert teams not found'
             ], 404);
         endif;
 
         return response()->json([
-            'status' => 'success',
+            'status' => true,
             'data' => $expertTeams
         ], 200);
     }

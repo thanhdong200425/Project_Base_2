@@ -22,15 +22,15 @@ class BlogController extends Controller
 
         if ($blogs->count() > 0):
             return response()->json([
-                'status' => 'success',
+                'status' => true,
                 'data' => $blogs
             ], 200);
         endif;
 
 
         return response()->json([
-            'status' => 'failed',
-            'message' => 'No blog found'
+            'status' => false,
+            'data' => 'No blog found'
         ], 404);
     }
 }

@@ -47,17 +47,17 @@ return new class extends Migration {
         });
 
         Schema::table('services', function (Blueprint $table) {
-            $table->foreign('team_id')->references('position_id')->on('staff_positions')->onDelete('cascade');
+            $table->foreign('teamid')->references('positionid')->on('staff_positions')->onDelete('cascade');
         });
 
 //        Schema::table('staff_teams', function(Blueprint $table) {
-//            $table->foreign('team_id')->references('team_id')->on('expert_teams')->onDelete('cascade');
+//            $table->foreign('teamid')->references('teamid')->on('expert_teams')->onDelete('cascade');
 //            $table->foreign('staff_position_id')->references('staff_position_id')->on('staff_positions')->onDelete('cascade');
-//            $table->primary(['team_id', 'staff_position_id']);
+//            $table->primary(['teamid', 'staff_position_id']);
 //        });
 
         Schema::table('expert_teams', function (Blueprint $table) {
-            $table->foreign('team_id')->references('position_id')->on('staff_positions')->onDelete('cascade');
+            $table->foreign('positionid')->references('positionid')->on('staff_positions')->onDelete('cascade');
         });
 
         Schema::table('comments', function (Blueprint $table) {

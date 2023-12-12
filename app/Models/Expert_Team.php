@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Expert_Team extends Model
 {
     use HasFactory;
-    protected $table = 'expert_teams';
+    protected $table = 'expert_team';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'team_id',
+        'postionid',
         'name',
         'gender',
         'dob',

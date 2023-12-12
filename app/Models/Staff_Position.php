@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Staff_Position extends Model
 {
     use HasFactory;
-    protected $table = 'staff_positions';
-    protected $primaryKey = 'team_id';
+    protected $table = 'staff_position';
+    protected $primaryKey = 'postionid';
     protected $fillable = [
         'name'
     ];

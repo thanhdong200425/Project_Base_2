@@ -16,14 +16,14 @@ class UserController extends Controller
         $user = User::where('email', $request->email)->get();
         if ($user->count() > 0) {
             return response()->json([
-                'message' => "OK",
-                'user' => $user,
+                'status' => true,
+                'data' => $user,
             ], 200);
         }
 
         return response()->json([
-            'status' => 404,
-            'message' => "User not found",
+            'status' => false,
+            'data' => "User not found",
         ], 404);
     }
 
@@ -41,26 +41,26 @@ class UserController extends Controller
 
                 if ($user) {
                     return response()->json([
-                        'status' => 200,
-                        'message' => "Added"
+                        'status' => true,
+                        'data' => "Added"
                     ], 200);
                 }
 
                 return response()->json([
-                    'status' => 400,
-                    'message' => 'Error when add'
+                    'status' => false,
+                    'data' => 'Error when add'
                 ], 400);
             } else {
                 return response()->json([
-                    'status' => 400,
-                    'message' => 'Password must be match'
+                    'status' => false,
+                    'data' => 'Password must be match'
                 ], 400);
             }
         }
 
         return response()->json([
-            'status' => 400,
-            'message' => "Something went wrong"
+            'status' => false,
+            'data' => "Something went wrong"
         ]);
     }
 
@@ -70,8 +70,8 @@ class UserController extends Controller
 
         if ($user->count() == 0):
             return response()->json([
-                'status' => 'Success',
-                'message' => 'No user found'
+                'status' => false,
+                'data' => 'No user found'
             ], 400);
         endif;
 
@@ -79,8 +79,8 @@ class UserController extends Controller
         $user->save();
 
         return response()->json([
-            'status' => 'Success',
-            'message' => 'Updated'
+            'status' => true,
+            'data' => 'Updated'
         ], 200);
     }
 }

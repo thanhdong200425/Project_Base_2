@@ -10,7 +10,7 @@ class Service extends Model
     use HasFactory;
     protected $primaryKey = 'service_id';
     protected $fillable = [
-        'team_id',
+        'teamid',
         'name',
         'slug',
         'icon',
