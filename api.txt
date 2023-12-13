@@ -13,3 +13,10 @@ Detail information of all expert teams: http://127.0.0.1:8000/api/expert_teams
 Get all the blogs (title, users.fullname content, category_name) followed by the category and user: http://127.0.0.1:8000/api/blogs_categories
 
 Update information of a user(only test for fullname): http://127.0.0.1:8000/api/user/update/4 (* Add fullname input with the request *)
+
+ADMIN
+{
+  +) Get the information of all users: http://127.0.0.1:8000/api/admin/get_users
+  +) Get the information of all expert teams: http://127.0.0.1:8000/api/admin/get_experts_team
+  +) Update status of a user: http://127.0.0.1:8000/api/admin/user/update/1 (* Add status input with the request *)
+}

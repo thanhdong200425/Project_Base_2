@@ -33,7 +33,7 @@ use App\Http\Controllers\Admin\ExpertTeamController as AdminExpertTeamController
      -) Admin
         +) Lấy danh sách người dùng (ok)
         +) Lấy danh sách nhân sự (ok)
-        +) Thay đổi trạng thái tài khoản của user
+        +) Thay đổi trạng thái tài khoản của user (ok)
         +) Lấy danh sách dịch vụ đã đăng ký
         +) Thông tin thời gian làm việc của user
         +) Danh sách dịch vụ đang cần chờ duyệt
