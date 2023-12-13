@@ -18,7 +18,7 @@ ADMIN
 {
   +) Get the information of all users: http://127.0.0.1:8000/api/admin/get_users
   +) Get the information of all expert teams: http://127.0.0.1:8000/api/admin/get_experts_team
-  +) Update status of a user: (* Add status input with the request *)
-            -) Test: http://127.0.0.1:8000/api/admin/user/update/1
-            -) Origin: http://127.0.0.1:8000/api/admin/user/update/{id}
+  +) Update status of a user: (* Add "status" and "id" input with the request *)
+            -) Test: http://127.0.0.1:8000/api/admin/user/update
+            -) Origin: http://127.0.0.1:8000/api/admin/user/update
 }

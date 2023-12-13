@@ -80,7 +80,7 @@ Route::prefix('/admin')->group(function () {
     Route::get('/get_experts_team', [ExpertTeamController::class, 'getAll']);
 
     // Update status of a user
-    Route::patch('/user/update/{id}', [AdminUserController::class, 'update']);
+    Route::patch('/user/update/', [AdminUserController::class, 'update']);
 });
 
 

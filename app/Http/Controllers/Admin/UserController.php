@@ -25,10 +25,10 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function update(Request $request, $id): JsonResponse
+    public function update(Request $request): JsonResponse
     {
         $status = [0, 1, 2];
-        $user = User::find($id);
+        $user = User::find($request->id);
         if ($user->count() == 0):
             return response()->json([
                 'status' => false,
