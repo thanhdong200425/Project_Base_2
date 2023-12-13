@@ -38,7 +38,9 @@ class UserController extends Controller
                     'data' => []
                 ]);
             endif;
-            $user->status = $request->status;
+            DB::table('users')->where('id', $request->id)->update([
+                'status' => $request->status
+            ]);
             return response()->json([
                 'status' => true,
                 'data' => $user
