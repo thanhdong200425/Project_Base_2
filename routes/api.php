@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ExpertTeamController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\ExpertTeamController as AdminExpertTeamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,11 +23,24 @@ use App\Http\Controllers\ExpertTeamController;
 
 /*TODO
     API:
+     -) User
         +) Thong tin chi tiet cua pet (ok)
         +) Thong tin chi tiet cua service (ok)
         +) Thong tin chi tiet cua expert team (ok)
         +) Thông tin chi tiết của blog theo category và user (ok)
         +) Thay đổi thông tin người dùng (ok)
+
+     -) Admin
+        +) Lấy danh sách người dùng (ok)
+        +) Lấy danh sách nhân sự (ok)
+        +) Thay đổi trạng thái tài khoản của user
+        +) Lấy danh sách dịch vụ đã đăng ký
+        +) Thông tin thời gian làm việc của user
+        +) Danh sách dịch vụ đang cần chờ duyệt
+        +) Duyệt dịch vụ
+        +) Lấy trạng thái danh sách người dùng
+
+
 
 */
 
@@ -56,3 +71,19 @@ Route::get('/blogs_categories', [BlogController::class, 'getAllByCategory'])->na
 
 // Update the information of a user
 Route::patch('/user/update/{id}', [UserController::class, 'update'])->name('user.update');
+
+Route::prefix('/admin')->group(function () {
+    // Get the information of all users
+    Route::get('/get_users', [AdminUserController::class, 'getAll']);
+
+    // Get the information of all experts team
+    Route::get('/get_experts_team', [ExpertTeamController::class, 'getAll']);
+
+    // Update status of a user
+    Route::patch('/user/update/{id}', [AdminUserController::class, 'update']);
+});
+
+
+
+
+

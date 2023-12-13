@@ -16,5 +16,5 @@ class User extends Model
         'decentralization_id'
     ];
 
-    protected $hidden = ['password'];
+    protected $hidden = ['password', 'created_at', 'updated_at'];
 }

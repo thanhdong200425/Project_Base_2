@@ -11,13 +11,13 @@ class BlogController extends Controller
 {
     public function getAllByCategory(): JsonResponse
     {
-        $blogs = DB::table('blogs')
-            ->join('blog_categories', 'blogs.category_id', '=', 'blog_categories.category_id')
-            ->join('users', 'blogs.user_id', '=', 'users.id')
-            ->select('blog_categories.name as category_name', 'users.fullname as user', 'blogs.title as title', 'blogs.content as content')
+        $blogs = DB::table('blog')
+            ->join('blog_categories', 'blog.category_id', '=', 'blog_categories.category_id')
+            ->join('users', 'blog.user_id', '=', 'users.id')
+            ->select('blog_categories.name as category_name', 'users.fullname as user', 'blog.title as title', 'blog.content as content')
             ->orderBy('blog_categories.name', 'asc')
-            ->whereNotNull('blogs.category_id')
-            ->whereNotNull('blogs.user_id')
+            ->whereNotNull('blog.category_id')
+            ->whereNotNull('blog.user_id')
             ->get();
 
         if ($blogs->count() > 0):
@@ -26,7 +26,6 @@ class BlogController extends Controller
                 'data' => $blogs
             ], 200);
         endif;
-
 
         return response()->json([
             'status' => false,
