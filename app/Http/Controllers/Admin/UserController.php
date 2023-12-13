@@ -52,7 +52,35 @@ class UserController extends Controller
                 'data' => []
             ]
         );
+    }
+
+    public function getServices(Request $request): JsonResponse
+    {
+        $userId = $request->id;
 
 
+        $result = DB::table('user_services')
+            ->where('user_services.user_id', '=', $userId)
+            ->where('user_services.status', '=', '0')
+            ->orWhere('user_services.status', '=', '1')
+            ->join('users', 'user_services.user_id', '=', 'users.id')
+            ->join('services', 'services.service_id', '=', 'user_services.service_id')
+            ->join('timeworkings', 'timeworkings.timeworking_id', '=', 'user_services.period_time_id')
+            ->get([
+                'user_services.*', 'users.fullname', 'services.name as service_name', 'timeworkings.timeworking'
+            ]);
+
+
+        if ($result->isEmpty()):
+            return response()->json([
+                'status' => false,
+                'data' => []
+            ], 404);
+        endif;
+
+        return response()->json([
+            'status' => true,
+            'data' => $result
+        ]);
     }
 }

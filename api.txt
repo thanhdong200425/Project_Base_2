@@ -21,4 +21,9 @@ ADMIN
   +) Update status of a user: (* Add "status" and "id" input with the request *)
             -) Test: http://127.0.0.1:8000/api/admin/user/update
             -) Origin: http://127.0.0.1:8000/api/admin/user/update
+
+  +) Get the registered services of a user
+            -) Route: http://127.0.0.1:8000/api/admin/user/get_services
+            -) Input: 'id'
+            -) Method: POST
 }
