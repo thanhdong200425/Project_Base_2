@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\User;
 
 class UserController extends Controller
 {
-    public function getAll()
+    public function getAll(): JsonResponse
     {
         $users = User::all();
         if ($users->count() == 0) {
@@ -24,7 +25,7 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): JsonResponse
     {
         $status = [0, 1, 2];
         $user = User::find($id);
@@ -35,14 +36,12 @@ class UserController extends Controller
             ]);
         endif;
 
-        foreach ($status as $value):
-            if ($request->status != $value):
-                return response()->json([
-                    'status' => false,
-                    'data' => []
-                ]);
-            endif;
-        endforeach;
+        if (!in_array($request->status, $status)):
+            return response()->json([
+                'status' => false,
+                'data' => []
+            ]);
+        endif;
 
         $user->status = $request->status;
         if ($user->save()):
