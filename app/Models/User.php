@@ -13,7 +13,14 @@ class User extends Model
         'email',
         'password',
         'status',
-        'decentralization_id'
+        'phone',
+        'address',
+        'dob',
+        'contact_facebook',
+        'contact_twitter',
+        'contact_linkedin',
+        'contact_pinterest',
+        'about_content'
     ];
 
     protected $hidden = ['password', 'created_at', 'updated_at'];
