@@ -15,4 +15,6 @@ class User extends Model
         'status',
         'decentralization_id'
     ];
+
+    protected $hidden = ['password'];
 }
