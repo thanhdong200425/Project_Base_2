@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('login_tokens', function (Blueprint $table) {
-            $table->id('login_token_id');
+        Schema::create('login_token', function (Blueprint $table) {
+            $table->id('id');
             $table->bigInteger('user_id')->unsigned()->nullable();
-            $table->string('token');
+            $table->string('token')->nullable();
             $table->timestamps();
             $table->engine = 'InnoDB';
         });

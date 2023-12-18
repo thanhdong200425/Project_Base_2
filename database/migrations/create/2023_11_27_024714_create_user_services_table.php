@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_services', function (Blueprint $table) {
-            $table->bigInteger('service_id')->unsigned()->nullable();
-            $table->bigInteger('user_id')->unsigned()->nullable();
+        Schema::create('user_service', function (Blueprint $table) {
+            $table->bigInteger('serviceid')->unsigned();
+            $table->bigInteger('userid')->unsigned();
             $table->tinyInteger('status')->comment('0: Pending, 1: Accepted, 2: Rejected, 3: Completed')->default(0);
             $table->tinyInteger('payment_status')->nullable()->default(0)->comment('0: Not payment, 1: Paymented');
-            $table->date('register_date');
-            $table->bigInteger('period_time_id')->unsigned()->nullable();
+            $table->date('register_day')->nullable();
+            $table->bigInteger('periodTime')->unsigned()->nullable();
             $table->timestamps();
             $table->engine = 'InnoDB';
         });

@@ -21,12 +21,14 @@ class ProductFactory extends Factory
             'price' => $this->faker->randomElement([100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]),
             'quantity' => $this->faker->randomElement([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
             'thumbnail2' => $this->faker->imageUrl($width = 640, $height = 480),
-            'dimension' => $this->faker->randomElement(['S', 'M', 'L', 'XL', 'XXL']),
+            'dimensions' => $this->faker->randomElement(['S', 'M', 'L', 'XL', 'XXL']),
             'color' => $this->faker->randomElement(['red', 'blue', 'green', 'yellow', 'black', 'white', 'pink', 'purple', 'orange', 'gray']),
             'evaluate_star' => $this->faker->randomElement([1, 2, 3, 4, 5]),
-            'evaluate_count' => $this->faker->randomElement([1, 2, 3, 4, 5]),
+            'evaluate_quantity' => $this->faker->randomElement([1, 2, 3, 4, 5]),
             'description' => $this->faker->text($maxNbChars = 200),
-            'status' => $this->faker->randomElement([0, 1])
+            'product_status' => $this->faker->randomElement([0, 1]),
+            'ingredient' => $this->faker->text($maxNbChars = 200),
+            'origin' => $this->faker->country(),
         ];
     }
 }

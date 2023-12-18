@@ -12,9 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('blog_categories', function (Blueprint $table) {
-            $table->id('category_id');
-            $table->string('name');
-            $table->string('slug');
+            $table->id();
+            $table->string('name')->nullable();
+            $table->string('slug')->nullable();
+            $table->bigInteger('user_id')->nullable()->unsigned();
             $table->timestamps();
             $table->engine = 'InnoDB';
         });

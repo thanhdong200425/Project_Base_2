@@ -11,43 +11,43 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreign('decentralization_id')->references('decentralization_id')->on('decentralizations')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('decentralization_id')->references('id')->on('decentralization')->onDelete('cascade')->onUpdate('cascade');
         });
-        Schema::table('bills', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        Schema::table('bill', function (Blueprint $table) {
+            $table->foreign('userid')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
 
-        Schema::table('bill_details', function (Blueprint $table) {
-            $table->foreign('bill_id')->references('bill_id')->on('bills')->onDelete('cascade');
-            $table->foreign('product_id')->references('product_id')->on('products')->onDelete('cascade');
+        Schema::table('billdetail', function (Blueprint $table) {
+            $table->foreign('billid')->references('billid')->on('bill')->onDelete('cascade');
+            $table->foreign('productid')->references('productid')->on('product')->onDelete('cascade');
             $table->primary('billdetail_id');
         });
 
-        Schema::table('products', function (Blueprint $table) {
-            $table->foreign('promotion_id')->references('promotion_id')->on('promotions')->onDelete('cascade');
+        Schema::table('product', function (Blueprint $table) {
+            $table->foreign('promotionid')->references('promotionid')->on('promotion')->onDelete('cascade');
         });
 
         Schema::table('default_pages', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
-        Schema::table('login_tokens', function (Blueprint $table) {
+        Schema::table('login_token', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
-        Schema::table('pets', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-        });
+        // Schema::table('pets', function (Blueprint $table) {
+        //     $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        // });
 
-        Schema::table('user_services', function (Blueprint $table) {
-            $table->foreign('service_id')->references('service_id')->on('services')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('period_time_id')->references('timeworking_id')->on('timeworkings')->onDelete('cascade');
-            $table->primary(['service_id', 'user_id']);
+        Schema::table('user_service', function (Blueprint $table) {
+            $table->foreign('serviceid')->references('id')->on('services')->onDelete('cascade');
+            $table->foreign('userid')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('periodTime')->references('id')->on('timeworking')->onDelete('cascade');
+            $table->primary(['serviceid', 'userid']);
         });
 
         Schema::table('services', function (Blueprint $table) {
-            $table->foreign('teamid')->references('positionid')->on('staff_positions')->onDelete('cascade');
+            $table->foreign('teamid')->references('position_id')->on('staff_position')->onDelete('cascade');
         });
 
 //        Schema::table('staff_teams', function(Blueprint $table) {
@@ -56,24 +56,32 @@ return new class extends Migration {
 //            $table->primary(['teamid', 'staff_position_id']);
 //        });
 
-        Schema::table('expert_teams', function (Blueprint $table) {
-            $table->foreign('positionid')->references('positionid')->on('staff_positions')->onDelete('cascade');
+        Schema::table('expert_team', function (Blueprint $table) {
+            $table->foreign('position_id')->references('position_id')->on('staff_position')->onDelete('cascade');
         });
 
         Schema::table('comments', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('blog_id')->references('blog_id')->on('blogs')->onDelete('cascade');
-            $table->foreign('parent_id')->references('comment_id')->on('comments')->onDelete('cascade');
+            $table->foreign('blog_id')->references('id')->on('blog')->onDelete('cascade');
+            $table->foreign('parent_id')->references('id')->on('comments')->onDelete('cascade');
         });
 
-        Schema::table('blogs', function (Blueprint $table) {
+        Schema::table('blog', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('category_id')->references('category_id')->on('blog_categories')->onDelete('cascade');
+            $table->foreign('blog_category_id')->references('id')->on('blog_categories')->onDelete('cascade');
         });
 
-        Schema::table('carts', function (Blueprint $table) {
-            $table->foreign('product_id')->references('product_id')->on('products')->onDelete('cascade');
+        Schema::table('cart', function (Blueprint $table) {
+            $table->foreign('productid')->references('productid')->on('product')->onDelete('cascade');
             $table->foreign('userid')->references('id')->on('users')->onDelete('cascade');
+        });
+
+        Schema::table('blog_categories', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        });
+
+        Schema::table('contacts', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -82,6 +90,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        //
+       
     }
 };

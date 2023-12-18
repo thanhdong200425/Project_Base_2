@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bills', function (Blueprint $table) {
-            $table->id('bill_id');
-            $table->bigInteger('user_id')->unsigned()->nullable();
+        Schema::create('bill', function (Blueprint $table) {
+            $table->id('billid');
+            $table->bigInteger('userid')->unsigned()->nullable();
             $table->string('payment_method');
             $table->float('total_price');
-            $table->dateTime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->integer('status')->default(0)->comment('0: Not pay, 1: Paid, 2: Cancel');
-            $table->tinyInteger('payment_status')->nullable()->default(0);
+            $table->integer('payment_status')->nullable()->default(0);
+            $table->timestamps();
             $table->engine = 'InnoDB';
         });
     }

@@ -12,16 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('blog', function (Blueprint $table) {
-            $table->id('blog_id');
-            $table->string('title');
-            $table->string('slug');
+            $table->id();
+            $table->string('title')->nullable();
+            $table->string('slug')->nullable();
             $table->bigInteger('user_id')->unsigned()->nullable();
-            $table->bigInteger('category_id')->unsigned()->nullable();
-            $table->text('content');
-            $table->integer('view_count');
-            $table->integer('comment_count');
-            $table->string('thumbnail');
-            $table->text('description');
+            $table->bigInteger('blog_category_id')->unsigned()->nullable();
+            $table->text('content')->nullable();
+            $table->integer('view_count')->nullable();
+            $table->integer('comment_count')->nullable();
+            $table->string('thumbnail')->nullable();
+            $table->text('descr')->nullable();
+            $table->string('author')->nullable();
             $table->timestamps();
             $table->engine = 'InnoDB';
         });

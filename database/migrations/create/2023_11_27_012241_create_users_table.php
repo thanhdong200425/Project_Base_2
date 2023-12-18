@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('fullname');
+            $table->string('fullname')->nullable();
             $table->string('email')->unique();
             $table->string('password');
             $table->string('thumbnail')->nullable();
             $table->date('dob')->nullable();
             $table->string('address')->nullable();
             $table->integer('phone')->nullable();
-            $table->text('description')->nullable();
+            $table->text('about_content')->nullable();
             $table->string('contact_facebook')->nullable();
             $table->string('contact_twitter')->nullable();
             $table->string('contact_linkedin')->nullable();
@@ -29,7 +29,8 @@ return new class extends Migration
             $table->text('active_token')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->bigInteger('decentralization_id')->unsigned()->nullable();
-            $table->dateTime('last_active')->nullable();
+            $table->dateTime('last_activity')->nullable();
+            $table->text('delivery_address')->nullable();
             $table->timestamps();
             $table->engine = 'InnoDB';
         });

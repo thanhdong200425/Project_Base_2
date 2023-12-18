@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('timeworkings', function (Blueprint $table) {
-            $table->id('timeworking_id')->nullable();
+        Schema::create('timeworking', function (Blueprint $table) {
+            $table->id()->nullable();
             $table->string('timeworking')->nullable();
         });
     }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('staff_position', function (Blueprint $table) {
             $table->id('position_id');
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->engine = 'InnoDB';
         });
     }

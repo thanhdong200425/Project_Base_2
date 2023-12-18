@@ -8,8 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Decentralization extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'decentralization_id';
+    protected $table = 'decentralization';
+    protected $primaryKey = 'id';
     protected $fillable = [
-        'decentralization_name',
+        'name',
+        'permission',
+        'created_at',
+        'updated_at'
     ];
 }

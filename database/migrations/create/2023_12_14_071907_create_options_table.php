@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('decentralization', function (Blueprint $table) {
-            $table->id('id');
+        Schema::create('options', function (Blueprint $table) {
+            $table->id();
+            $table->string('key')->nullable();
             $table->string('name')->nullable();
-            $table->text('permission')->nullable();
-            $table->timestamps();
-            $table->engine = 'InnoDB';
+            $table->text('value')->nullable();
+            $table->engine = "INNODB";
         });
     }
 
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('decentralizations');
+        Schema::dropIfExists('options');
     }
 };

@@ -9,11 +9,13 @@ class Default_Page extends Model
 {
     use HasFactory;
     protected $table = 'default_pages';
-    protected $primaryKey = 'defaul_page_id';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'title',
         'slug',
         'content',
-        'user_id'
+        'user_id',
+        'created_at',
+        'updated_at'
     ];
 }

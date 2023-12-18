@@ -23,7 +23,8 @@ class BlogFactory extends Factory
             'view_count' => $this->faker->numberBetween(1,100),
             'comment_count' => $this->faker->numberBetween(1,100),
             'thumbnail' => $this->faker->imageUrl(),
-            'description' => $this->faker->text(),
+            'descr' => $this->faker->text(),
+            'author' => $this->faker->name()
         ];
     }
 }

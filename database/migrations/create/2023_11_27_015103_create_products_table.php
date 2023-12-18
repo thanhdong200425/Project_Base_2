@@ -11,20 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
-            $table->id('product_id');
-            $table->string('product_name');
+        Schema::create('product', function (Blueprint $table) {
+            $table->id('productid');
+            $table->string('product_name')->nullable();
             $table->string('slug')->nullable();
-            $table->float('price');
+            $table->float('price')->nullable();
             $table->integer('quantity')->unsigned();
-            $table->string('thumbnail2');
-            $table->bigInteger('promotion_id')->unsigned()->nullable();
-            $table->string('dimension');
-            $table->string('color');
-            $table->integer('evaluate_star');
-            $table->integer('evaluate_count');
-            $table->text('description');
-            $table->integer('status')->unsigned()->comment('0: inactive, 1: active');
+            $table->string('thumbnail2')->nullable();
+            $table->bigInteger('promotionid')->unsigned()->nullable();
+            $table->string('dimensions')->nullable();
+            $table->string('color')->nullable();
+            $table->integer('evaluate_star')->nullable();
+            $table->integer('evaluate_quantity')->nullable();
+            $table->text('description')->nullable();
+            $table->integer('product_status')->unsigned()->comment('0: inactive, 1: active')->nullable();
             $table->text('ingredient')->nullable();
             $table->string('origin')->nullable();
             $table->timestamps();

@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Pet extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'pet_id';
+    protected $table = 'pets';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'name',
         'thumbnail',
-        'description',
-        'user_id',
+        'descr',
         'pet_category_id',
         'origin',
         'other_names',
@@ -21,7 +21,9 @@ class Pet extends Model
         'fur_style',
         'fur_color',
         'weight',
-        'longevity'
+        'longevity',
+        'created_at',
+        'updated_at'
     ];
 
     protected $hidden = ['pet_id', 'created_at', 'updated_at'];

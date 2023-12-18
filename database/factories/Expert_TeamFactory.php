@@ -23,11 +23,12 @@ class Expert_TeamFactory extends Factory
             'phone' => $this->faker->randomElement([0,1]),
             'email' => $this->faker->unique()->safeEmail(),
             'avatar' => $this->faker->imageUrl(),
-            'description' => $this->faker->text(),
+            'about' => $this->faker->text(),
             'pinterest' => $this->faker->url(),
             'facebook' => $this->faker->url(),
             'twitter' => $this->faker->url(),
             'tiktok' => $this->faker->url(),
+            'experience' => $this->faker->randomElement([0,1]),
         ];
     }
 }

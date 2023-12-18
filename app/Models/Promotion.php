@@ -8,11 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Promotion extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'promotion_id';
+    protected $table = 'promotion';
+    protected $primaryKey = 'promotionid';
     protected $fillable = [
-        'name',
-        'type',
-        'value',
-        'status'
+        'promotion_name',
+        'promotion_type',
+        'promotion_value',
+        'promotion_status',
+        'time_start'
     ];
+
+    public $timestamps = false;
 }

@@ -26,7 +26,7 @@ class PetController extends Controller
 
     public function getOne(Request $request): JsonResponse
     {
-        $pet = Pet::where('pet_id', $request->id)->get();
+        $pet = Pet::where('id', $request->id)->get();
         if ($pet->count() > 0):
             return response()->json([
                 'status' => true,

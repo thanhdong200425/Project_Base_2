@@ -19,9 +19,9 @@ class PetFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'thumbnail' => $this->faker->imageUrl(),
-            'description' => $this->faker->text(), 
+            'descr' => $this->faker->text(),
             'origin' => $this->faker->country(),
-            'other_names' => $this->faker->name(),
+            'other_name' => $this->faker->name(),
             'classify' => $this->faker->name(),
             'fur_color' => $this->faker->colorName(),
             'fur_style' => $this->faker->name(),

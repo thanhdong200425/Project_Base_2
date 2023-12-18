@@ -12,7 +12,7 @@ class ServiceController extends Controller
     {
         $services = DB::table('services')
             ->select('services.*', 'staff_position.name as staff_position_name')
-            ->join('staff_position', 'services.teamid', '=', 'staff_position.positionid')
+            ->join('staff_position', 'services.teamid', '=', 'staff_position.position_id')
             ->get();
 
         if ($services->count() <= 0):

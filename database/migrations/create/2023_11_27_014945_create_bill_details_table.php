@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bill_details', function (Blueprint $table) {
+        Schema::create('billdetail', function (Blueprint $table) {
             $table->bigInteger('billdetail_id')->unsigned()->nullable();
-            $table->bigInteger('bill_id')->unsigned()->nullable();
-            $table->bigInteger('product_id')->unsigned()->nullable();
-            $table->integer('quantity');
-            $table->float('price');
+            $table->bigInteger('billid')->unsigned()->nullable();
+            $table->bigInteger('productid')->unsigned()->nullable();
+            $table->integer('quantity')->nullable();
+            $table->float('price')->nullable();
+            $table->timestamps();
             $table->engine = 'InnoDB';
         });
     }

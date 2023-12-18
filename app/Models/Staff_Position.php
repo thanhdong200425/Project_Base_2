@@ -9,9 +9,11 @@ class Staff_Position extends Model
 {
     use HasFactory;
     protected $table = 'staff_position';
-    protected $primaryKey = 'postionid';
+    protected $primaryKey = 'position_id';
     protected $fillable = [
         'name'
     ];
+
+    public $timestamps = false;
 
 }

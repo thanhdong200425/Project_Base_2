@@ -17,10 +17,11 @@ class PromotionFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name,
-            'type' => $this->faker->randomElement(['fixed', 'percent']),
-            'value' => $this->faker->randomElement([1000,2000,3000,4000,5000,6000,7000,8000,9000,10000]), 
-            'status' => $this->faker->randomElement([0,1])
+            'promotion_name' => $this->faker->name,
+            'promotion_type' => $this->faker->randomElement(['fixed', 'percent']),
+            'promotion_value' => $this->faker->randomElement([1000,2000,3000,4000,5000,6000,7000,8000,9000,10000]),
+            'promotion_status' => $this->faker->randomElement([0,1]),
+            'time_start' => $this->faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now', $timezone = null),
         ];
     }
 }

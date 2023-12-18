@@ -20,6 +20,8 @@ class CommentFactory extends Factory
             'name' => $this->faker->name(),
             'content' => $this->faker->text(),
             'status' => $this->faker->randomElement([0,1,2]),
+            'email' => $this->faker->safeEmail(),
+            'website' => $this->faker->domainName()
         ];
     }
 }

@@ -16,8 +16,10 @@ class TimeworkingFactory extends Factory
      */
     public function definition(): array
     {
+        $time = $this->faker->time();
+        $convertTime = strtotime($time);
         return [
-            
+            'timeworking' => $convertTime,
         ];
     }
 }

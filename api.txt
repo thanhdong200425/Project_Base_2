@@ -26,4 +26,19 @@ ADMIN
             -) Route: http://127.0.0.1:8000/api/admin/user/get_services
             -) Input: 'id'
             -) Method: POST
+
+  +) Get the time working
+            -) Route: http://127.0.0.1:8000/api/admin/get_time_working
+            -) Input: none
+            -) Method: GET
+
+  +) Get the service that is pending
+            -) Route: http://127.0.0.1:8000/api/admin/get_pending_service
+            -) Input: none
+            -) Method: GET
+
+  +) Update the status of a user
+           -) Route: http://127.0.0.1:8000/api/admin/user/update_service
+           -) Input: 'userid' and 'serviceid'
+           -) Method: PUT
 }

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Timeworking;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use function PHPUnit\Framework\isEmpty;
 
 class UserController extends Controller
 {
@@ -58,16 +60,17 @@ class UserController extends Controller
     {
         $userId = $request->id;
 
-
-        $result = DB::table('user_services')
-            ->where('user_services.user_id', '=', $userId)
-            ->where('user_services.status', '=', '0')
-            ->orWhere('user_services.status', '=', '1')
-            ->join('users', 'user_services.user_id', '=', 'users.id')
-            ->join('services', 'services.service_id', '=', 'user_services.service_id')
-            ->join('timeworkings', 'timeworkings.timeworking_id', '=', 'user_services.period_time_id')
+        /* Get the registered service of a user */
+        $result = DB::table('user_service')
+            ->where('user_service.userid', '=', $userId)
+            ->where('user_service.status', '=', '0')
+            ->orWhere('user_service.status', '=', '1')
+            ->join('users', 'user_service.userid', '=', 'users.id')
+            ->join('services', 'services.id', '=', 'user_service.serviceid')
+            ->join('timeworking', 'timeworking.id', '=', 'user_service.periodTime')
             ->get([
-                'user_services.*', 'users.fullname', 'services.name as service_name', 'timeworkings.timeworking'
+                'services.*', 'user_service.userid', 'user_service.serviceid', 'user_service.status',
+                'user_service.register_day', 'user_service.periodTime', 'user_service.payment_status', 'timeworking.*'
             ]);
 
 
@@ -83,4 +86,83 @@ class UserController extends Controller
             'data' => $result
         ]);
     }
+
+    public function getTimeWorking(): JsonResponse
+    {
+
+        $time = Timeworking::all();
+        if ($time == []):
+            return response()->json([
+                'status' => false,
+                'data' => []
+            ], 400);
+        endif;
+
+        return response()->json([
+            'status' => true,
+            'data' => $time
+        ]);
+    }
+
+    public function getPendingServices(): JsonResponse
+    {
+        $pendingServices = DB::table('user_service')
+            ->join('services', 'user_service.serviceid', '=', 'services.id')
+            ->join('users', 'user_service.userid', '=', 'users.id')
+            ->where('user_service.status', '=', '0')
+            ->get([
+                'services.*', 'user_service.*', 'users.fullname', 'users.email as email'
+            ]);
+
+        if ($pendingServices === null):
+            return response()->json([
+                'status' => false,
+                'data' => []
+            ], 404);
+        endif;
+
+        return response()->json([
+            'status' => true,
+            'data' => $pendingServices
+        ]);
+    }
+
+    public function updateService(Request $request): JsonResponse
+    {
+        $getService = DB::table('user_service')
+            ->where('userid', '=', $request->userid)
+            ->where('serviceid', '=', $request->serviceid)
+            ->where('status', '=', 0)
+            ->get('user_service.*');
+
+
+        if (count($getService) == 0):
+            return response()->json([
+                'status' => false,
+                'data' => []
+            ], 404);
+        endif;
+
+//        dd($getService);
+
+        DB::table('user_service')
+            ->where('userid', '=', $request->userid)
+            ->where('serviceid', '=', $request->serviceid)
+            ->update([
+                'status' => 1,
+                'updated_at' => now()
+            ]);
+
+        $result = DB::table('user_service')
+            ->where('userid', '=', $request->userid)
+            ->where('serviceid', '=', $request->serviceid)
+            ->get('user_service.*');
+
+        return response()->json([
+            'status' => true,
+            'data' => $result
+        ]);
+    }
+
+
 }

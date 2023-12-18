@@ -17,7 +17,8 @@ class DecentralizationFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->randomElement(['admin','user', 'guest'])
+            'name' => $this->faker->randomElement(['admin','user', 'guest']),
+            'permission' => $this->faker->randomElement(['add','edit', 'delete', 'view']),
         ];
     }
 }

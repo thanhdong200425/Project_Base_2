@@ -8,16 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class Blog extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'blog_id';
+    protected $table = 'blog';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'title',
         'slug',
         'user_id',
-        'category_id',
+        'blog_category_id',
         'content',
         'view_count',
         'comment_count',
         'thumbnail',
-        'description',
+        'descr',
+        'author',
+        'created_at',
+        'updated_at'
     ];
 }

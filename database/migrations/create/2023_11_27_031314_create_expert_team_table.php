@@ -13,18 +13,19 @@ return new class extends Migration
     {
         Schema::create('expert_team', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('positionid')->unsigned()->nullable();
-            $table->string('name');
-            $table->tinyInteger('gender')->comment('0: Man, 1: Woman');
+            $table->bigInteger('position_id')->unsigned()->nullable();
+            $table->string('name')->nullable();
+            $table->tinyInteger('gender')->comment('0: Man, 1: Woman')->nullable();
             $table->date('dob');
-            $table->integer('phone');
-            $table->string('email');
-            $table->string('avatar');
-            $table->text('description');
-            $table->string('pinterest');
-            $table->string('facebook');
-            $table->string('twitter');
-            $table->string('tiktok');
+            $table->integer('phone')->nullable();
+            $table->string('email')->nullable();
+            $table->string('avatar')->nullable();
+            $table->integer('experience')->default(1);
+            $table->text('about')->nullable();
+            $table->string('pinterest')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('tiktok')->nullable();
             $table->timestamps();
             $table->engine = 'InnoDB';
         });

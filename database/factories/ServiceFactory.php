@@ -20,8 +20,9 @@ class ServiceFactory extends Factory
             'name' => $this->faker->name(),
             'slug' => $this->faker->unique()->slug(),
             'icon' => $this->faker->imageUrl(),
-            'description' => $this->faker->text(),
+            'descr' => $this->faker->text(),
             'cost' => $this->faker->numberBetween(1,100),
+            'content' => $this->faker->text(),
         ];
     }
 }

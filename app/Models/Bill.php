@@ -8,15 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Bill extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'bill_id';
+    protected $table = 'bill';
+    protected $primaryKey = 'billid';
     protected $fillable = [
-        'user_id',
+        'userid',
         'payment_method',
         'total_price',
-        'created_at',
         'status',
-        'updated_at'
+        'updated_at',
+        'created_at',
     ];
 
-    
+
 }

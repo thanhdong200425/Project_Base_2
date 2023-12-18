@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('default_pages', function (Blueprint $table) {
-            $table->id('default_page_id');
-            $table->string('title');
-            $table->string('slug');
-            $table->string('content');
+            $table->id('id');
+            $table->string('title')->nullable();
+            $table->string('slug')->nullable();
+            $table->text('content')->nullable();
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->timestamps();
             $table->engine = 'InnoDB';

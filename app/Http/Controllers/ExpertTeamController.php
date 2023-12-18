@@ -11,7 +11,7 @@ class ExpertTeamController extends Controller
     public function getAll(): JsonResponse
     {
         $expertTeams = DB::table('expert_team')
-            ->join('staff_position', 'expert_team.positionid', '=', 'staff_position.positionid')
+            ->join('staff_position', 'expert_team.position_id', '=', 'staff_position.position_id')
             ->select('staff_position.name as staff_position_name', 'expert_team.*')
             ->get();
 

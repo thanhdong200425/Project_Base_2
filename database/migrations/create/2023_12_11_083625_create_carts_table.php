@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('carts', function (Blueprint $table) {
+        Schema::create('cart', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('product_id')->nullable()->unsigned();
+            $table->bigInteger('productid')->nullable()->unsigned();
             $table->bigInteger('userid')->nullable()->unsigned();
             $table->integer('quantity')->nullable();
             $table->float('price')->nullable();

@@ -18,10 +18,13 @@ class Expert_Team extends Model
         'phone',
         'email',
         'avatar',
-        'description',
+        'about',
+        'experience',
         'pinterest',
         'facebook',
         'twitter',
         'tiktok',
+        'created_at',
+        'updated_at'
     ];
 }

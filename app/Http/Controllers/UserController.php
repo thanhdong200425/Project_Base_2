@@ -75,7 +75,7 @@ class UserController extends Controller
             ], 400);
         endif;
 
-        $user->fill($request->only('fullname', 'email', 'phone', 'address', 'dob', 'contact_facebook', 'contact_twitter', 'contact_linkedin', 'contact_pinterest', 'about_content'));
+        $user->fill($request->all());
         $user->save();
 
         return response()->json([

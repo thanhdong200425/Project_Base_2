@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Timeworking extends Model
 {
     use HasFactory;
-    protected $table = 'timeworkings';
-    protected $primaryKey = 'timeworking_id';
-    public $timestamps = false;
+    protected $table = 'timeworking';
+    protected $primaryKey = 'id';
     protected $fillable = [
-        'time_start',
-        'time_end'
+        'timeworking'
     ];
+
+    public $timestamps = false;
 }

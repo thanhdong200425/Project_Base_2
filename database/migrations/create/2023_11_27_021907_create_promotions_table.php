@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('promotions', function (Blueprint $table) {
-            $table->id('promotion_id');
-            $table->string('name');
-            $table->string('type');
-            $table->float('value');
-            $table->timestamps();
-            $table->integer('status')->unsigned()->comment('0: inactive, 1: active');
+        Schema::create('promotion', function (Blueprint $table) {
+            $table->id('promotionid');
+            $table->string('promotion_name')->nullable();
+            $table->string('promotion_type')->nullable();
+            $table->float('promotion_value')->nullable();
+            $table->integer('promotion_status')->unsigned()->comment('0: inactive, 1: active');
+            $table->dateTime('time_start')->nullable();
             $table->engine = 'InnoDB';
         });
     }
