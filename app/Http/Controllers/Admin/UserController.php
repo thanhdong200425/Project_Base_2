@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Timeworking;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -50,21 +51,17 @@ class UserController extends Controller
         }
 
         return response()->json([
-                'status' => false,
-                'data' => []
-            ]
+            'status' => false,
+            'data' => []
+        ]
         );
     }
 
-    public function getServices(Request $request): JsonResponse
+    public function getServices($userId, $status): mixed
     {
-        $userId = $request->id;
-
-        /* Get the registered service of a user */
         $result = DB::table('user_service')
             ->where('user_service.userid', '=', $userId)
-            ->where('user_service.status', '=', '0')
-            ->orWhere('user_service.status', '=', '1')
+            ->where('user_service.status', '=', $status)
             ->join('users', 'user_service.userid', '=', 'users.id')
             ->join('services', 'services.id', '=', 'user_service.serviceid')
             ->join('timeworking', 'timeworking.id', '=', 'user_service.periodTime')
@@ -73,8 +70,33 @@ class UserController extends Controller
                 'user_service.register_day', 'user_service.periodTime', 'user_service.payment_status', 'timeworking.*'
             ]);
 
-
         if ($result->isEmpty()):
+            return false;
+        endif;
+
+        return $result;
+    }
+
+    public function getPendingServicesOfUser(Request $request): JsonResponse
+    {
+        $result = $this->getServices($request->id, '0');
+        if ($result === false):
+            return response()->json([
+                'status' => false,
+                'data' => []
+            ], 404);
+        endif;
+
+        return response()->json([
+            'status' => true,
+            'data' => $result
+        ]);
+    }
+
+    public function getAcceptedServicesOfUser(Request $request): JsonResponse
+    {
+        $result = $this->getServices($request->id, '1');
+        if ($result === false):
             return response()->json([
                 'status' => false,
                 'data' => []
@@ -143,7 +165,7 @@ class UserController extends Controller
             ], 404);
         endif;
 
-//        dd($getService);
+        //        dd($getService);
 
         DB::table('user_service')
             ->where('userid', '=', $request->userid)

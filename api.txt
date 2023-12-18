@@ -22,8 +22,13 @@ ADMIN
             -) Test: http://127.0.0.1:8000/api/admin/user/update
             -) Origin: http://127.0.0.1:8000/api/admin/user/update
 
-  +) Get the registered services of a user
-            -) Route: http://127.0.0.1:8000/api/admin/user/get_services
+  +) Get the peding services of a user (status = 0)
+            -) Route: http://127.0.0.1:8000/api/admin/user/get_services/pending
+            -) Input: 'id'
+            -) Method: POST
+
+  +) Get the accepted services of a user (status = 1)
+            -) Route: http://127.0.0.1:8000/api/admin/user/get_services/accepted
             -) Input: 'id'
             -) Method: POST
 
@@ -32,12 +37,12 @@ ADMIN
             -) Input: none
             -) Method: GET
 
-  +) Get the service that is pending
+  +) Get the service that is pending of all the users
             -) Route: http://127.0.0.1:8000/api/admin/get_pending_service
             -) Input: none
             -) Method: GET
 
-  +) Update the status of a user
+  +) Update the service status of a user
            -) Route: http://127.0.0.1:8000/api/admin/user/update_service
            -) Input: 'userid' and 'serviceid'
            -) Method: PUT

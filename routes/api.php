@@ -35,6 +35,8 @@ use App\Http\Controllers\Admin\ExpertTeamController as AdminExpertTeamController
         +) Lấy danh sách nhân sự (ok)
         +) Thay đổi trạng thái tài khoản của user (ok)
         +) Lấy danh sách dịch vụ đã đăng ký của user (ok)
+            1) Lấy danh sách dịch vụ đang chờ của user (ok)
+            2) Lấy danh sách dịch vụ đã phê duyệt của user
         +) Thông tin thời gian làm việc của user (ok)
         +) Danh sách dịch vụ đang cần chờ duyệt (ok)
         +) Duyệt dịch vụ (ok)
@@ -82,8 +84,11 @@ Route::prefix('/admin')->group(function () {
     // Update status of a user
     Route::patch('/user/update', [AdminUserController::class, 'update']);
 
-    // Get the registered services of a user
-    Route::post('/user/get_services', [AdminUserController::class, 'getServices']);
+    // Get the pending services of a user
+    Route::post('/user/get_services/pending', [AdminUserController::class, 'getPendingServicesOfUser']);
+
+    // Get the accepted services of a user
+    Route::post('/user/get_services/accepted', [AdminUserController::class, 'getAcceptedServicesOfUser']);
 
     // Get the time working of a user
     Route::get('/get_time_working', [AdminUserController::class, 'getTimeWorking']);
