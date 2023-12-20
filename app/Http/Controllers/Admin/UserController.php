@@ -51,9 +51,9 @@ class UserController extends Controller
         }
 
         return response()->json([
-            'status' => false,
-            'data' => []
-        ]
+                'status' => false,
+                'data' => []
+            ]
         );
     }
 
@@ -186,5 +186,24 @@ class UserController extends Controller
         ]);
     }
 
+    public function getServiceStatus(Request $request): JsonResponse
+    {
+        $result = DB::table('user_service')
+            ->where('user_service.userid', '=', $request->userid)
+            ->where('user_service.serviceid', '=', $request->serviceid)
+            ->get('user_service.status');
 
+
+        if ($result == []):
+            return response()->json([
+                'status' => false,
+                'data' => []
+            ], 404);
+        endif;
+
+        return response()->json([
+            'status' => true,
+            'data' => $result
+        ]);
+    }
 }

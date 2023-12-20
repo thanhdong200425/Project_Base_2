@@ -9,6 +9,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ExpertTeamController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\ExpertTeamController as AdminExpertTeamController;
+use App\Http\Controllers\Admin\BillController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,13 @@ use App\Http\Controllers\Admin\ExpertTeamController as AdminExpertTeamController
 
 /*TODO
     API:
+     -) Chung:
+        +) Đăng nhập (ok)
+        +) Đăng ký (ok)
+        +) Đăng xuất (doing)
+            -) Cho user
+            -) Cho admin
+
      -) User
         +) Thong tin chi tiet cua pet (ok)
         +) Thong tin chi tiet cua service (ok)
@@ -40,7 +48,9 @@ use App\Http\Controllers\Admin\ExpertTeamController as AdminExpertTeamController
         +) Thông tin thời gian làm việc của user (ok)
         +) Danh sách dịch vụ đang cần chờ duyệt (ok)
         +) Duyệt dịch vụ (ok)
-        +) Lấy trạng thái danh sách người dùng
+        +) Lấy trạng thái danh sách người dùng (ok)
+        +) Lấy danh sách hóa đơn đang chờ duyệt (ok)
+        +) Lấy danh sách hóa đơn đã duyệt (ok)
 
 
 
@@ -55,6 +65,9 @@ Route::post("/", [UserController::class, 'sign_in'])->name("signIn");
 
 // Sign up
 Route::post('/sign_up', [UserController::class, 'sign_up'])->name('signUp');
+
+// Log out
+Route::post('/log_out', [UserController::class, 'sign_out']);
 
 // Detail information about pets
 Route::get('/pets', [PetController::class, 'getAll'])->name('pets.getAll');
@@ -98,6 +111,15 @@ Route::prefix('/admin')->group(function () {
 
     // Update the status of a service
     Route::put('/user/update_service', [AdminUserController::class, 'updateService']);
+
+    // Get the status of a user
+    Route::post('/user/get_service_status', [AdminUserController::class, 'getServiceStatus']);
+
+    // Get the list of pending bill
+    Route::post('/user/get_bills/pending', [BillController::class, 'getPendingBills']);
+
+    // Get the list of accepted bill
+    Route::post('/user/get_bills/accepted', [BillController::class, 'getAcceptedBills']);
 });
 
 

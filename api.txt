@@ -1,6 +1,17 @@
-Sign_in: http://127.0.0.1:8000/api/
+  +) Sign_in:
+        -) Route: http://127.0.0.1:8000/api/
+        -) Input: 'email', 'password'
+        -) Method: POST
 
-Sign_up: http://127.0.0.1:8000/api/sign-up
+  +) Sign_up:
+        -) Route: http://127.0.0.1:8000/api/sign_up
+        -) Input: 'email', 'password', 'confirm_password'
+        -) Method: POST
+
+  +) Sign_out: 
+       -) Route: http://127.0.0.1:8000/api/log_out
+       -) Input: none
+       -) Method: POST
 
 Detail information of all pets: http://127.0.0.1:8000/api/pets
 
@@ -46,4 +57,19 @@ ADMIN
            -) Route: http://127.0.0.1:8000/api/admin/user/update_service
            -) Input: 'userid' and 'serviceid'
            -) Method: PUT
+
+  +) Get the service status of a user
+           -) Route: http://127.0.0.1:8000/api/admin/user/get_service_status
+           -) Input: 'userid' and 'serviceid'
+           -) Method: POST
+
+  +) Get pending bills of a user
+           -) Route: http://127.0.0.1:8000/api/admin/user/get_bills/pending
+           -) Input: 'userid'
+           -) Method: POST
+
+  +) Get accepted bills of a user
+           -) Route: http://127.0.0.1:8000/api/admin/user/get_bills/accepted
+           -) Input: 'userid'
+           -) Method: POST
 }

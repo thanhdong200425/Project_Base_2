@@ -14,9 +14,11 @@ class BlogController extends Controller
         $blogs = DB::table('blog')
             ->join('blog_categories', 'blog.blog_category_id', '=', 'blog_categories.id')
             ->select('blog.*', 'blog_categories.name as category_name')
-            ->orderBy('blog_categories.name', 'asc')
+            ->orderBy('blog.blog_category_id', 'asc')
             ->whereNotNull('blog.blog_category_id')
             ->get();
+
+        $blogs = $blogs->groupBy('category_name');
 
         if ($blogs->count() > 0):
             return response()->json([
