@@ -29,9 +29,11 @@ ADMIN
 {
   +) Get the information of all users: http://127.0.0.1:8000/api/admin/get_users
   +) Get the information of all expert teams: http://127.0.0.1:8000/api/admin/get_experts_team
-  +) Update status of a user: (* Add "status" and "id" input with the request *)
-            -) Test: http://127.0.0.1:8000/api/admin/user/update
-            -) Origin: http://127.0.0.1:8000/api/admin/user/update
+
+  +) Update status of a user
+            -) Route: http://127.0.0.1:8000/api/admin/user/update
+            -) Input: 'id' and 'status' (Only accept 'status' = [1,2,3])
+            -) Method: PATCH
 
   +) Get the peding services of a user (status = 0)
             -) Route: http://127.0.0.1:8000/api/admin/user/get_services/pending
@@ -72,4 +74,14 @@ ADMIN
            -) Route: http://127.0.0.1:8000/api/admin/user/get_bills/accepted
            -) Input: 'userid'
            -) Method: POST
+
+  +) Get the list of user that has decentraliztion = 2
+           -) Route: http://127.0.0.1:8000/api/admin/list_user
+           -) Input: 'none'
+           -) Method: GET
+  
+  +) Get the list of user that has decentraliztion = 3
+          -) Route: http://127.0.0.1:8000/api/admin/list_competent_personnel
+          -) Input: 'none'
+          -) Method: GET
 }

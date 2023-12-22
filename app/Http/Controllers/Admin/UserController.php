@@ -32,18 +32,19 @@ class UserController extends Controller
     public function update(Request $request): JsonResponse
     {
         $status = [0, 1, 2];
-        $user = DB::table('users')->where('id', $request->id)->first();
-
-        if ($user != null) {
+        $user = User::where('id', $request->id)->first();
+    
+        if ($user != []) {
             if (!in_array($request->status, $status)):
                 return response()->json([
                     'status' => false,
                     'data' => []
-                ]);
+                ], 404);
             endif;
-            DB::table('users')->where('id', $request->id)->update([
-                'status' => $request->status
-            ]);
+            // Update status
+            $user->status = $request->status;
+            $user->save();
+
             return response()->json([
                 'status' => true,
                 'data' => $user
@@ -51,10 +52,9 @@ class UserController extends Controller
         }
 
         return response()->json([
-                'status' => false,
-                'data' => []
-            ]
-        );
+            'status' => false,
+            'data' => []
+        ], 404);
     }
 
     public function getServices($userId, $status): mixed
@@ -165,8 +165,6 @@ class UserController extends Controller
             ], 404);
         endif;
 
-        //        dd($getService);
-
         DB::table('user_service')
             ->where('userid', '=', $request->userid)
             ->where('serviceid', '=', $request->serviceid)
@@ -195,6 +193,54 @@ class UserController extends Controller
 
 
         if ($result == []):
+            return response()->json([
+                'status' => false,
+                'data' => []
+            ], 404);
+        endif;
+
+        return response()->json([
+            'status' => true,
+            'data' => $result
+        ]);
+    }
+
+    public function getUserWithCondition($id): mixed
+    {
+        $users = DB::table('users')
+            ->where('decentralization_id', '=', $id)
+            ->get([
+                'id', 'fullname', 'email', 'thumbnail', 'dob', 'address', 'phone', 'about_content', 'contact_facebook',
+                'contact_twitter', 'contact_linkedin', 'contact_pinterest', 'status', 'created_at'
+            ]);
+
+        if ($users->count() <= 0):
+            return false;
+        endif;
+
+        return $users;
+    }
+
+    public function getUsers(): JsonResponse
+    {
+        $users = $this->getUserWithCondition(2);
+        if ($users == false):
+            return response()->json([
+                'status' => false,
+                'data' => []
+            ], 404);
+        endif;
+
+        return response()->json([
+            'status' => true,
+            'data' => $users
+        ]);
+    }
+
+    public function getCompetentPersonnels(): JsonResponse
+    {
+        $result = $this->getUserWithCondition(3);
+        if ($result == false):
             return response()->json([
                 'status' => false,
                 'data' => []

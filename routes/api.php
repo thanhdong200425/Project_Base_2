@@ -27,7 +27,7 @@ use App\Http\Controllers\Admin\BillController;
      -) Chung:
         +) Đăng nhập (ok)
         +) Đăng ký (ok)
-        +) Đăng xuất (doing)
+        +) Đăng xuất (ok)
             -) Cho user
             -) Cho admin
 
@@ -44,13 +44,15 @@ use App\Http\Controllers\Admin\BillController;
         +) Thay đổi trạng thái tài khoản của user (ok)
         +) Lấy danh sách dịch vụ đã đăng ký của user (ok)
             1) Lấy danh sách dịch vụ đang chờ của user (ok)
-            2) Lấy danh sách dịch vụ đã phê duyệt của user
+            2) Lấy danh sách dịch vụ đã phê duyệt của user (ok)
         +) Thông tin thời gian làm việc của user (ok)
         +) Danh sách dịch vụ đang cần chờ duyệt (ok)
         +) Duyệt dịch vụ (ok)
         +) Lấy trạng thái danh sách người dùng (ok)
         +) Lấy danh sách hóa đơn đang chờ duyệt (ok)
         +) Lấy danh sách hóa đơn đã duyệt (ok)
+        +) Lấy danh sách người dùng có decentralizaion = 2 (ok)
+        +) Lấy danh sách người dùng có decentralizaion = 3 (ok)
 
 
 
@@ -120,6 +122,12 @@ Route::prefix('/admin')->group(function () {
 
     // Get the list of accepted bill
     Route::post('/user/get_bills/accepted', [BillController::class, 'getAcceptedBills']);
+
+    // Get the list of user that has decentralization = 2
+    Route::get('/list_user', [AdminUserController::class, 'getUsers']);
+
+    // Get the list of user that has decentralization = 3
+    Route::get('/list_competent_personnel', [AdminUserController::class, 'getCompetentPersonnels']);
 });
 
 
