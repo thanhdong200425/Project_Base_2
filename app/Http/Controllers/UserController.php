@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Laravel\Sanctum\HasApiTokens;
 
 class UserController extends Controller
@@ -67,14 +68,14 @@ class UserController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $user = User::find($id);
+        $user = User::find($request->id);
 
-        if ($user->count() == 0):
+        if ($user == null):
             return response()->json([
                 'status' => false,
-                'data' => 'No user found'
+                'data' => []
             ], 400);
         endif;
 
@@ -95,4 +96,81 @@ class UserController extends Controller
             'data' => 'Successfully log out'
         ]);
     }
+
+    public function registry(Request $request): JsonResponse
+    {
+        $result = DB::table('user_service')->insert([
+            'userid' => $request->userid,
+            'serviceid' => $request->serviceid,
+            'periodTime' => $request->periodTime,
+            'register_day' => $request->register_day,
+            'created_at' => date('Y-m-d H:i:s')
+        ]);
+
+        $data = DB::table('user_service')
+            ->where('userid', '=', $request->userid)
+            ->where('serviceid', '=', $request->serviceid)
+            ->get();
+
+        if ($result === true):
+            return response()->json([
+                'status' => true,
+                'data' => $data
+            ]);
+        endif;
+
+        return response()->json([
+            'status' => false,
+            'data' => []
+        ], 400);
+    }
+
+    public function cancelService(Request $request): JsonResponse
+    {
+        $data = DB::table('user_service')
+            ->where('userid', '=', $request->userid)
+            ->where('serviceid', '=', $request->serviceid)
+            ->delete();
+
+        if ($data != 1):
+            return response()->json([
+                'status' => false,
+                'data' => $data
+            ], 404);
+        endif;
+
+        return response()->json([
+            'status' => true,
+            'data' => $data
+        ]);
+    }
+
+    public function updateService(Request $request)
+    {
+        $data = DB::table('user_service')
+            ->where('userid', '=', $request->userid)
+            ->where('serviceid', '=', $request->serviceid)
+            ->update([
+                'periodTime' => $request->periodTime,
+                'register_day' => $request->register_day,
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+
+        if ($data == 0):
+            return response()->json([
+                'status' => false,
+                'data' => []
+            ], 404);
+        endif;
+
+        return response()->json([
+            'status' => true,
+            'data' => $data
+        ]);
+
+
+
+
+    }
+
 }

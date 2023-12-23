@@ -23,7 +23,25 @@ Detail information of all expert teams: http://127.0.0.1:8000/api/expert_teams
 
 Get all the blogs (title, users.fullname content, category_name) followed by the category and user: http://127.0.0.1:8000/api/blogs_categories
 
-Update information of a user(only test for fullname): http://127.0.0.1:8000/api/user/update/4 (* Add fullname input with the request *)
+  +) Update information of a user
+            -) Route: http://127.0.0.1:8000/api/user/update
+            -) Input: 'id', 'fullname', 'email', 'address', 'phone', 'dob', 'contact_pinterest', 'contact_facebook', 'contact_linkedin', 'contact_twitter' and 'about_content'
+            -) Method: PUT
+
+  +) User registry service
+            -) Route: http://127.0.0.1:8000/api/user/registry_service
+            -) Input: 'userid', 'serviceid', 'periodTime' and 'register_day'
+            -) Method: POST
+
+  +)  Cancel registered service of a user
+            -) Route: http://127.0.0.1:8000/api/user/cancel_service
+            -) Input: 'userid' and 'serviceid'
+            -) Method: DELETE
+
+  +)  Update registered service of a user
+            -) Route: http://127.0.0.1:8000/api/user/update_service
+            -) Input: 'userid', 'serviceid', 'periodTime' and 'register_day'
+            -) Method: PUT
 
 ADMIN
 {

@@ -33,7 +33,7 @@ class UserController extends Controller
     {
         $status = [0, 1, 2];
         $user = User::where('id', $request->id)->first();
-    
+
         if ($user != []) {
             if (!in_array($request->status, $status)):
                 return response()->json([
@@ -191,8 +191,7 @@ class UserController extends Controller
             ->where('user_service.serviceid', '=', $request->serviceid)
             ->get('user_service.status');
 
-
-        if ($result == []):
+        if ($result->count() <= 0):
             return response()->json([
                 'status' => false,
                 'data' => []

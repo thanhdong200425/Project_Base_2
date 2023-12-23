@@ -53,6 +53,9 @@ use App\Http\Controllers\Admin\BillController;
         +) Lấy danh sách hóa đơn đã duyệt (ok)
         +) Lấy danh sách người dùng có decentralizaion = 2 (ok)
         +) Lấy danh sách người dùng có decentralizaion = 3 (ok)
+        +) Người dùng đăng ký dịch vụ (ok)
+        +) Hủy dịch vụ đã đăng ký (ok)
+        +) Cập nhật dịch vụ đã đăng ký (doing)
 
 
 
@@ -87,7 +90,16 @@ Route::get('/expert_teams', [ExpertTeamController::class, 'getAll'])->name('expe
 Route::get('/blogs_categories', [BlogController::class, 'getAllByCategory'])->name('blogs.getAllByCategory');
 
 // Update the information of a user
-Route::patch('/user/update/{id}', [UserController::class, 'update'])->name('user.update');
+Route::put('/user/update', [UserController::class, 'update'])->name('user.update');
+
+// User registry service
+Route::post('/user/registry_service', [UserController::class, 'registry']);
+
+// Cancel registered service of a user
+Route::delete('/user/cancel_service', [UserController::class, 'cancelService']);
+
+// Update registered service of a user
+Route::put('/user/update_service', [UserController::class, 'updateService']);
 
 Route::prefix('/admin')->group(function () {
     // Get the information of all users
