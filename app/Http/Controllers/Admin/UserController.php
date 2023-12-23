@@ -195,7 +195,7 @@ class UserController extends Controller
             return response()->json([
                 'status' => false,
                 'data' => []
-            ], 404);
+            ]);
         endif;
 
         return response()->json([
