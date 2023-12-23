@@ -68,7 +68,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function update(Request $request)
+    public function update(Request $request): JsonResponse
     {
         $user = User::find($request->id);
 
@@ -84,7 +84,7 @@ class UserController extends Controller
 
         return response()->json([
             'status' => true,
-            'data' => 'Updated'
+            'data' => $user
         ], 200);
     }
 
