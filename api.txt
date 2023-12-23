@@ -36,7 +36,7 @@ Get all the blogs (title, users.fullname content, category_name) followed by the
   +)  Cancel registered service of a user
             -) Route: http://127.0.0.1:8000/api/user/cancel_service
             -) Input: 'userid' and 'serviceid'
-            -) Method: DELETE
+            -) Method: POST
 
   +)  Update registered service of a user
             -) Route: http://127.0.0.1:8000/api/user/update_service

@@ -96,7 +96,7 @@ Route::put('/user/update', [UserController::class, 'update'])->name('user.update
 Route::post('/user/registry_service', [UserController::class, 'registry']);
 
 // Cancel registered service of a user
-Route::delete('/user/cancel_service', [UserController::class, 'cancelService']);
+Route::post('/user/cancel_service', [UserController::class, 'cancelService']);
 
 // Update registered service of a user
 Route::put('/user/update_service', [UserController::class, 'updateService']);
