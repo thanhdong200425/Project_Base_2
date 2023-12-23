@@ -37,7 +37,7 @@ class BillController extends Controller
             return response()->json([
                 'status' => false,
                 'data' => []
-            ], 404);
+            ]);
         endif;
 
         return response()->json([
@@ -53,7 +53,7 @@ class BillController extends Controller
             return response()->json([
                 'status' => false,
                 'data' => []
-            ], 404);
+            ]);
         endif;
 
         return response()->json([

@@ -15,7 +15,7 @@ class PetController extends Controller
             return response()->json([
                 'status' => false,
                 'data' => 'No record found'
-            ], 204);
+            ]);
         }
 
         return response()->json([
@@ -37,6 +37,6 @@ class PetController extends Controller
         return response()->json([
             'status' => false,
             'data' => 'Pet not found'
-        ], 404);
+        ]);
     }
 }

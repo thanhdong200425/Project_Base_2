@@ -20,7 +20,7 @@ class UserController extends Controller
             return response()->json([
                 'status' => false,
                 'data' => []
-            ], 404);
+            ]);
         }
 
         return response()->json([
@@ -39,7 +39,7 @@ class UserController extends Controller
                 return response()->json([
                     'status' => false,
                     'data' => []
-                ], 404);
+                ]);
             endif;
             // Update status
             $user->status = $request->status;
@@ -54,7 +54,7 @@ class UserController extends Controller
         return response()->json([
             'status' => false,
             'data' => []
-        ], 404);
+        ]);
     }
 
     public function getServices($userId, $status): mixed
@@ -84,7 +84,7 @@ class UserController extends Controller
             return response()->json([
                 'status' => false,
                 'data' => []
-            ], 404);
+            ]);
         endif;
 
         return response()->json([
@@ -100,7 +100,7 @@ class UserController extends Controller
             return response()->json([
                 'status' => false,
                 'data' => []
-            ], 404);
+            ]);
         endif;
 
         return response()->json([
@@ -117,7 +117,7 @@ class UserController extends Controller
             return response()->json([
                 'status' => false,
                 'data' => []
-            ], 400);
+            ]);
         endif;
 
         return response()->json([
@@ -140,7 +140,7 @@ class UserController extends Controller
             return response()->json([
                 'status' => false,
                 'data' => []
-            ], 404);
+            ]);
         endif;
 
         return response()->json([
@@ -162,7 +162,7 @@ class UserController extends Controller
             return response()->json([
                 'status' => false,
                 'data' => []
-            ], 404);
+            ]);
         endif;
 
         DB::table('user_service')
@@ -227,7 +227,7 @@ class UserController extends Controller
             return response()->json([
                 'status' => false,
                 'data' => []
-            ], 404);
+            ]);
         endif;
 
         return response()->json([
@@ -243,7 +243,7 @@ class UserController extends Controller
             return response()->json([
                 'status' => false,
                 'data' => []
-            ], 404);
+            ]);
         endif;
 
         return response()->json([

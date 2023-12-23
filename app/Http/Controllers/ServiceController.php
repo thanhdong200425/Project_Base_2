@@ -19,7 +19,7 @@ class ServiceController extends Controller
             return response()->json([
                 'status' => false,
                 'data' => 'No service found'
-            ], 404);
+            ]);
         endif;
 
         return response()->json([

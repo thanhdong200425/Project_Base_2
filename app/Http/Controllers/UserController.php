@@ -28,7 +28,7 @@ class UserController extends Controller
         return response()->json([
             'status' => false,
             'data' => "User not found",
-        ], 404);
+        ]);
     }
 
 
@@ -53,12 +53,12 @@ class UserController extends Controller
                 return response()->json([
                     'status' => false,
                     'data' => 'Error when add'
-                ], 400);
+                ]);
             } else {
                 return response()->json([
                     'status' => false,
                     'data' => 'Password must be match'
-                ], 400);
+                ]);
             }
         }
 
@@ -76,7 +76,7 @@ class UserController extends Controller
             return response()->json([
                 'status' => false,
                 'data' => []
-            ], 400);
+            ]);
         endif;
 
         $user->fill($request->all());
@@ -122,7 +122,7 @@ class UserController extends Controller
         return response()->json([
             'status' => false,
             'data' => []
-        ], 400);
+        ]);
     }
 
     public function cancelService(Request $request): JsonResponse
@@ -136,7 +136,7 @@ class UserController extends Controller
             return response()->json([
                 'status' => false,
                 'data' => $data
-            ], 404);
+            ]);
         endif;
 
         return response()->json([
@@ -160,7 +160,7 @@ class UserController extends Controller
             return response()->json([
                 'status' => false,
                 'data' => []
-            ], 404);
+            ]);
         endif;
 
         return response()->json([

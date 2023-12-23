@@ -19,12 +19,12 @@ class ExpertTeamController extends Controller
             return response()->json([
                 'status' => false,
                 'data' => 'Expert teams not found'
-            ], 404);
+            ]);
         endif;
 
         return response()->json([
             'status' => true,
             'data' => $expertTeams
-        ], 200);
+        ]);
     }
 }
