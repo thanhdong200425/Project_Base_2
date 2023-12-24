@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PetController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Http\Request;
@@ -55,7 +56,13 @@ use App\Http\Controllers\Admin\BillController;
         +) Lấy danh sách người dùng có decentralizaion = 3 (ok)
         +) Người dùng đăng ký dịch vụ (ok)
         +) Hủy dịch vụ đã đăng ký (ok)
-        +) Cập nhật dịch vụ đã đăng ký (doing)
+        +) Cập nhật dịch vụ đã đăng ký (ok)
+        +) Lấy danh sách các sản phẩm (ok)
+        +) Thêm sản phẩm vào giỏ hàng (ok)
+        +) Thay đổi số lượng sản phẩm trong giỏ hàng (ok)
+        +) Xóa sản phẩm trong giỏ hàng (ok)
+        +) Lấy danh sách sản phẩm trong giỏ hàng (ok)
+        +) Lấy số lượng sản phẩm trong giỏ hàng (ok)
 
 
 
@@ -89,17 +96,37 @@ Route::get('/expert_teams', [ExpertTeamController::class, 'getAll'])->name('expe
 // Detail information about blog following category and user
 Route::get('/blogs_categories', [BlogController::class, 'getAllByCategory'])->name('blogs.getAllByCategory');
 
-// Update the information of a user
-Route::put('/user/update', [UserController::class, 'update'])->name('user.update');
+Route::prefix('/user')->group(function () {
+    // Update the information of a user
+    Route::put('/update', [UserController::class, 'update'])->name('user.update');
 
-// User registry service
-Route::post('/user/registry_service', [UserController::class, 'registry']);
+    // User registry service
+    Route::post('/registry_service', [UserController::class, 'registry']);
 
-// Cancel registered service of a user
-Route::post('/user/cancel_service', [UserController::class, 'cancelService']);
+    // Cancel registered service of a user
+    Route::post('/cancel_service', [UserController::class, 'cancelService']);
 
-// Update registered service of a user
-Route::put('/user/update_service', [UserController::class, 'updateService']);
+    // Update registered service of a user
+    Route::put('/update_service', [UserController::class, 'updateService']);
+
+    // Add product into cart
+    Route::post('/add_product_to_cart', [UserController::class, 'addProductToCart']);
+
+    // Change the quantity of product in a cart
+    Route::put('/update_quantity_of_cart', [UserController::class, 'updateQuantity']);
+
+    // Delete a product from a cart
+    Route::post('/remove_product', [UserController::class, 'removeProductFromCart']);
+
+    // Get all the product in the cart of a user
+    Route::post('/get_all_products_cart', [UserController::class, 'getProductsInCart']);
+
+    // Get the quantity of product in the cart
+    Route::post('/get_quantity_product_cart', [UserController::class, 'getQuantityInCart']);
+});
+
+// Get all products
+Route::get('/get_list_product', [ProductController::class, 'getAll']);
 
 Route::prefix('/admin')->group(function () {
     // Get the information of all users

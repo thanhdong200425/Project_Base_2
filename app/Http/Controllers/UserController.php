@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -145,7 +146,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function updateService(Request $request)
+    public function updateService(Request $request): JsonResponse
     {
         $data = DB::table('user_service')
             ->where('userid', '=', $request->userid)
@@ -173,4 +174,180 @@ class UserController extends Controller
 
     }
 
+    public function addProductToCart(Request $request): JsonResponse
+    {
+        // Get product price
+        $productPrice = DB::table('product')
+            ->where('productid', '=', $request->productid)
+            ->value('price');
+
+        $check = $this->isExistInCart($request->userid, $request->productid);
+
+        // Create a new record when it doesn't exist in the database
+        if ($check === false):
+            $price = $productPrice * ($request->quantity);
+            $data = $this->createCartWhenNotExist($request->userid, $request->productid, $request->quantity, $price);
+
+            return response()->json([
+                'status' => true,
+                'data' => $data
+            ]);
+        endif;
+
+        // Update when exist a record in a database
+        $updateQuantity = $request->quantity + $check->quantity;
+        $updatePrice = $updateQuantity * $productPrice;
+
+        $data = $this->updateCartWhenExist($request->userid, $request->productid, $updateQuantity, $updatePrice);
+
+        return response()->json([
+            'status' => true,
+            'data' => $data
+        ]);
+    }
+
+    public function isExistInCart($userid, $productid): mixed
+    {
+        $result = DB::table('cart')
+            ->where('userid', '=', $userid)
+            ->where('productid', '=', $productid)
+            ->first();
+
+        if ($result == null):
+            return false;
+        endif;
+
+        return $result;
+    }
+
+    public function updateCartWhenExist($userid, $productid, $quantity, $price): mixed
+    {
+        $updateData = DB::table('cart')
+            ->where([
+                ['userid', '=', $userid],
+                ['productid', '=', $productid]
+            ])
+            ->update([
+                'quantity' => $quantity,
+                'price' => $price
+            ]);
+        if ($updateData == 0):
+            return false;
+        endif;
+
+        $record = DB::table('cart')->where([
+            ['userid', '=', $userid],
+            ['productid', '=', $productid],
+        ])->first();
+
+        return $record;
+    }
+
+    public function createCartWhenNotExist($userid, $productid, $quantity, $price): mixed
+    {
+        $data = DB::table('cart')->insert([
+            'userid' => $userid,
+            'productid' => $productid,
+            'quantity' => $quantity,
+            'price' => $price
+        ]);
+
+        $newRecord = DB::table('cart')->where([
+            ['userid', '=', $userid],
+            ['productid', '=', $productid],
+        ])->first();
+
+        return $newRecord;
+    }
+
+    public function updateQuantity(Request $request): JsonResponse
+    {
+        $priceOfAProduct = DB::table('product')->where('productid', '=', $request->productid)->value('price');
+        $currentQuantity = DB::table('cart')
+            ->where('productid', '=', $request->productid)
+            ->where('userid', '=', $request->userid)
+            ->value('quantity');
+        $newQuantity = $request->quantity + $currentQuantity;
+        $newPrice = $newQuantity * $priceOfAProduct;
+
+        $data = $this->updateCartWhenExist($request->userid, $request->productid, $newQuantity, $newPrice);
+        if ($data === false):
+            return response()->json([
+                'status' => false,
+                'data' => []
+            ]);
+        endif;
+
+        return response()->json([
+            'status' => true,
+            'data' => $data
+        ]);
+    }
+
+    public function removeProductFromCart(Request $request): JsonResponse
+    {
+        $data = DB::table('cart')
+            ->where('userid', '=', $request->userid)
+            ->where('productid', '=', $request->productid)
+            ->first();
+
+        if ($data == null):
+            return response()->json([
+                'status' => false,
+                'data' => 0
+            ]);
+        endif;
+
+        $data = DB::table('cart')
+            ->where('userid', '=', $request->userid)
+            ->where('productid', '=', $request->productid)
+            ->delete();
+
+        return response()->json([
+            'status' => true,
+            'data' => $data
+        ]);
+    }
+
+    public function getProductsInCart(Request $request): JsonResponse
+    {
+        $data = DB::table('cart')
+            ->where('cart.userid', '=', $request->userid)
+            ->join('product', 'product.productid', '=', 'cart.productid')
+            ->get([
+                'product.thumbnail2', 'product.productid', 'product.origin', 'product.dimensions',
+                'product.color', 'product.price as productPrice', 'cart.quantity', 'cart.price as cartPrice',
+                'product.product_name'
+            ]);
+        if ($data->count() == 0):
+            return response()->json([
+                'status' => false,
+                'data' => []
+            ]);
+        endif;
+
+        return response()->json([
+            'status' => true,
+            'data' => $data
+        ]);
+    }
+
+    public function getQuantityInCart(Request $request): JsonResponse
+    {
+        $data = DB::table('cart')
+            ->where('userid', '=', $request->userid)
+            ->count('id');
+
+        if ($data == 0):
+            return response()->json([
+                'status' => false,
+                'data' => []
+            ]);
+        endif;
+
+        return response()->json([
+            'status' => true,
+            'data' => $data
+        ]);
+    }
 }

@@ -43,6 +43,33 @@ Get all the blogs (title, users.fullname content, category_name) followed by the
             -) Input: 'userid', 'serviceid', 'periodTime' and 'register_day'
             -) Method: PUT
 
+  +)  Get all product
+            -) Route: http://127.0.0.1:8000/api/get_list_product
+            -) Input: none
+            -) Method: GET
+  +)  Add product into cart
+            -) Route: http://127.0.0.1:8000/api/user/add_product_to_cart
+            -) Input: 'userid', 'productid' and 'quantity'
+            -) Method: POST
+  +)  Change the quantity of product in a cart
+            -) Route: http://127.0.0.1:8000/api/user/update_quantity_of_cart
+            -) Input: 'userid', 'productid' and 'quantity'
+            -) Method: PUT
+  +)  Delete a product from a cart
+            -) Route: http://127.0.0.1:8000/api/user/remove_product
+            -) Input: 'userid' and 'productid'
+            -) Method: POST
+  
+  +)  Get all the product in the cart of a user
+            -) Route: http://127.0.0.1:8000/api/user/get_all_products_cart
+            -) Input: 'userid'
+            -) Method: POST
+
+  +)  Get the quantity of product in the cart
+            -) Route: http://127.0.0.1:8000/api/user/get_quantity_product_cart
+            -) Input: 'userid'
+            -) Method: POST
+
 ADMIN
 {
   +) Get the information of all users: http://127.0.0.1:8000/api/admin/get_users
