@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('slug')->nullable();
             $table->float('price')->nullable();
             $table->integer('quantity')->unsigned();
-            $table->string('thumbnail2')->nullable();
+            $table->string('thumpnail2')->nullable();
             $table->bigInteger('promotionid')->unsigned()->nullable();
             $table->string('dimensions')->nullable();
             $table->string('color')->nullable();

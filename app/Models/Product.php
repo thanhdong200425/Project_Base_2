@@ -15,7 +15,7 @@ class Product extends Model
         'slug',
         'price',
         'quantity',
-        'thumbnail2',
+        'thumpnail2',
         'promotionid',
         'dimensions',
         'color',

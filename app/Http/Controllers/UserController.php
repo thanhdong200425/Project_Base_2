@@ -263,14 +263,9 @@ class UserController extends Controller
     public function updateQuantity(Request $request): JsonResponse
     {
         $priceOfAProduct = DB::table('product')->where('productid', '=', $request->productid)->value('price');
-        $currentQuantity = DB::table('cart')
-            ->where('productid', '=', $request->productid)
-            ->where('userid', '=', $request->userid)
-            ->value('quantity');
-        $newQuantity = $request->quantity + $currentQuantity;
-        $newPrice = $newQuantity * $priceOfAProduct;
+        $newPrice = $request->quantity * $priceOfAProduct;
 
-        $data = $this->updateCartWhenExist($request->userid, $request->productid, $newQuantity, $newPrice);
+        $data = $this->updateCartWhenExist($request->userid, $request->productid, $request->quantity, $newPrice);
         if ($data === false):
             return response()->json([
                 'status' => false,
@@ -315,7 +310,7 @@ class UserController extends Controller
             ->where('cart.userid', '=', $request->userid)
             ->join('product', 'product.productid', '=', 'cart.productid')
             ->get([
-                'product.thumbnail2', 'product.productid', 'product.origin', 'product.dimensions',
+                'product.thumpnail2', 'product.productid', 'product.origin', 'product.dimensions',
                 'product.color', 'product.price as productPrice', 'cart.quantity', 'cart.price as cartPrice',
                 'product.product_name'
             ]);

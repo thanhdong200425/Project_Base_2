@@ -20,7 +20,7 @@ class ProductFactory extends Factory
             'product_name' => $this->faker->name(),
             'price' => $this->faker->randomElement([100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]),
             'quantity' => $this->faker->randomElement([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
-            'thumbnail2' => $this->faker->imageUrl($width = 640, $height = 480),
+            'thumpnail2' => $this->faker->imageUrl($width = 640, $height = 480),
             'dimensions' => $this->faker->randomElement(['S', 'M', 'L', 'XL', 'XXL']),
             'color' => $this->faker->randomElement(['red', 'blue', 'green', 'yellow', 'black', 'white', 'pink', 'purple', 'orange', 'gray']),
             'evaluate_star' => $this->faker->randomElement([1, 2, 3, 4, 5]),

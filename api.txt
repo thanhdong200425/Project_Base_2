@@ -47,14 +47,17 @@ Get all the blogs (title, users.fullname content, category_name) followed by the
             -) Route: http://127.0.0.1:8000/api/get_list_product
             -) Input: none
             -) Method: GET
+
   +)  Add product into cart
             -) Route: http://127.0.0.1:8000/api/user/add_product_to_cart
             -) Input: 'userid', 'productid' and 'quantity'
             -) Method: POST
+
   +)  Change the quantity of product in a cart
             -) Route: http://127.0.0.1:8000/api/user/update_quantity_of_cart
             -) Input: 'userid', 'productid' and 'quantity'
             -) Method: PUT
+            
   +)  Delete a product from a cart
             -) Route: http://127.0.0.1:8000/api/user/remove_product
             -) Input: 'userid' and 'productid'
