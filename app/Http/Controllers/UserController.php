@@ -274,8 +274,7 @@ class UserController extends Controller
         endif;
 
         return response()->json([
-            'status' => true,
-            'data' => $data
+            'status' => true
         ]);
     }
 
