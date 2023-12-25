@@ -138,10 +138,10 @@ Route::prefix('/admin')->group(function () {
     // Update status of a user
     Route::patch('/user/update', [AdminUserController::class, 'update']);
 
-    // Get the pending services of a user
+    // Get the pending services of user
     Route::post('/user/get_services/pending', [AdminUserController::class, 'getPendingServicesOfUser']);
 
-    // Get the accepted services of a user
+    // Get the accepted services of user
     Route::post('/user/get_services/accepted', [AdminUserController::class, 'getAcceptedServicesOfUser']);
 
     // Get the time working of a user

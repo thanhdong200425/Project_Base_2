@@ -157,7 +157,6 @@ class UserController extends Controller
             ->where('status', '=', 0)
             ->get('user_service.*');
 
-
         if (count($getService) == 0):
             return response()->json([
                 'status' => false,
