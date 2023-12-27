@@ -14,8 +14,6 @@ use Laravel\Sanctum\HasApiTokens;
 
 class UserController extends Controller
 {
-
-
     public function sign_in(Request $request): JsonResponse
     {
         $user = User::where('email', $request->email)->first();
@@ -343,5 +341,135 @@ class UserController extends Controller
             'status' => true,
             'data' => $data
         ]);
+    }
+
+    public function getOneProduct(Request $request): JsonResponse
+    {
+        $data = DB::table('billdetail')
+            ->join('bill', 'bill.billid', '=', 'billdetail.billid')
+            ->join('product', 'product.productid', '=', 'billdetail.productid')
+            ->where('billdetail.billid', '=', $request->billid)
+            ->where('bill.userid', '=', $request->userid)
+            ->get([
+                'billdetail.quantity', 'billdetail.price as cartPrice', 'product.productid',
+                'product.product_name', 'product.price as productPrice', 'product.thumpnail2',
+                'product.color', 'product.dimensions'
+            ]);
+
+        if ($data->count() == 0):
+            return response()->json([
+                'status' => false,
+                'data' => []
+            ]);
+        endif;
+
+        return response()->json([
+            'status' => true,
+            'data' => $data
+        ]);
+    }
+
+    public function checkOut(Request $request): JsonResponse
+    {
+        $productInCart = DB::table('cart')
+            ->where('userid', '=', $request->userid)
+            ->get('id');
+
+
+        if ($productInCart->count() <= 0):
+            return response()->json([
+                'status' => false,
+                'data' => []
+            ]);
+        endif;
+
+        $newId = DB::table('bill')->insertGetId([
+            'userid' => $request->userid,
+            'total_price' => 0,
+            'created_at' => date('Y-m-d H:i:s')
+        ]);
+
+        if ($newId != null || $newId != 0):
+            $data = $request->input('data');
+            unset($data[0]);
+            $data = array_values($data);
+            foreach ($data as $item):
+                $checkInsert = DB::table('billdetail')->insert([
+                    'productid' => $item['id'],
+                    'price' => $item['intoMoney'],
+                    'quantity' => $item['quantity'],
+                    'billid' => $newId,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+            endforeach;
+
+            if ($checkInsert):
+                return response()->json([
+                    'status' => true,
+                    'data' => $newId
+                ]);
+            endif;
+        endif;
+
+        return response()->json([
+            'status' => false,
+            'data' => []
+        ]);
+
+    }
+
+    public function handlePayment(Request $request): JsonResponse
+    {
+        $queryGetBillDetail = DB::table('billdetail')
+            ->where('bill.userid', '=', $request->userid)
+            ->join('bill', 'billdetail.billid', '=', 'bill.billid')
+            ->get([
+                'billdetail.billid', 'billdetail.quantity', 'billdetail.price'
+            ]);
+
+        if ($queryGetBillDetail->count() > 0):
+            $billid = $queryGetBillDetail[0]->billid;
+            foreach ($queryGetBillDetail as $item):
+                $queryGetBill = DB::table('bill')
+                    ->where('billid', '=', $billid)
+                    ->first('total_price');
+
+                if ($queryGetBill->count() > 0):
+                    $updateStatus = DB::table('bill')
+                        ->where('billid', '=', $billid)
+                        ->update([
+                            'total_price' => $queryGetBill->total_price + $item['quantity'] * $item['price'],
+                            'payment_method' => $request->payment_method
+                        ]);
+                endif;
+            endforeach;
+            if ($updateStatus != 0):
+                $delete = $this->delete($request->userid, $request->data);
+                if ($delete):
+                    return response()->json([
+                        'status' => true
+                    ]);
+                endif;
+            endif;
+        endif;
+
+        return response()->json([
+            'status' => false,
+        ]);
+    }
+
+    public function delete($userid, $data)
+    {
+        foreach ($data as $item):
+            $deleteCart = DB::table('cart')
+                ->where('productid', '=', $item['id'])
+                ->where('userid', '=', $userid)
+                ->delete();
+        endforeach;
+
+        if ($deleteCart != 0):
+            return true;
+        endif;
+        return false;
     }
 }

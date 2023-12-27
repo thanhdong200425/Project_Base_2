@@ -73,6 +73,21 @@ Get all the blogs (title, users.fullname content, category_name) followed by the
             -) Input: 'userid'
             -) Method: POST
 
+  +)  Get a product of a user
+            -) Route: http://127.0.0.1:8000/api/user/get_product
+            -) Input: 'userid' and 'billid'
+            -) Method: POST
+
+  +)  Proceed to purchase
+            -) Route: http://127.0.0.1:8000/api/user/buy_product
+            -) Input: 'userid' and 'data'=> (array)
+            -) Method: POST
+
+  +)  Handle payment
+            -) Route: http://127.0.0.1:8000/api/user/handle_payment
+            -) Input: 'userid', 'payment_method', 'billid' and 'data' => (array)
+            -) Method: POST
+            
 ADMIN
 {
   +) Get the information of all users: http://127.0.0.1:8000/api/admin/get_users

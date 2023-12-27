@@ -63,6 +63,10 @@ use App\Http\Controllers\Admin\BillController;
         +) Xóa sản phẩm trong giỏ hàng (ok)
         +) Lấy danh sách sản phẩm trong giỏ hàng (ok)
         +) Lấy số lượng sản phẩm trong giỏ hàng (ok)
+        +) Lấy sản phẩm trong billdetail của 1 user (ok)
+        +) Tiến hành mua hàng (doing)
+        +) Giao diện thanh toán (doing)
+
 
 
 
@@ -123,6 +127,15 @@ Route::prefix('/user')->group(function () {
 
     // Get the quantity of product in the cart
     Route::post('/get_quantity_product_cart', [UserController::class, 'getQuantityInCart']);
+
+    // Get a product of a user
+    Route::post('get_product', [UserController::class, 'getOneProduct']);
+
+    // Proceed to purchase
+    Route::post('buy_product', [UserController::class, 'checkOut']);
+
+    // Handle payment
+    Route::post('handle_payment', [UserController::class, 'handlePayment']);
 });
 
 // Get all products
