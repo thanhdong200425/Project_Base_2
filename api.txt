@@ -147,4 +147,9 @@ ADMIN
           -) Route: http://127.0.0.1:8000/api/admin/list_competent_personnel
           -) Input: 'none'
           -) Method: GET
+
+  +)  Delete a product
+          -) Route: http://127.0.0.1:8000/api/admin/delete_product
+          -) Input: 'productid'
+          -) Method: POST
 }

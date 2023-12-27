@@ -64,8 +64,11 @@ use App\Http\Controllers\Admin\BillController;
         +) Lấy danh sách sản phẩm trong giỏ hàng (ok)
         +) Lấy số lượng sản phẩm trong giỏ hàng (ok)
         +) Lấy sản phẩm trong billdetail của 1 user (ok)
-        +) Tiến hành mua hàng (doing)
-        +) Giao diện thanh toán (doing)
+        +) Tiến hành mua hàng (ok)
+        +) Giao diện thanh toán (ok)
+        +) Xóa sản phẩm (doing)
+        +) Cập nhật sản phẩm (doing)
+        +) 
 
 
 
@@ -180,6 +183,9 @@ Route::prefix('/admin')->group(function () {
 
     // Get the list of user that has decentralization = 3
     Route::get('/list_competent_personnel', [AdminUserController::class, 'getCompetentPersonnels']);
+
+    // Delete a product
+    Route::post('/delete_product', [AdminUserController::class, 'deleteAProduct'] );
 });
 
 

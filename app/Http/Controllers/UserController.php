@@ -434,7 +434,7 @@ class UserController extends Controller
                     ->where('billid', '=', $billid)
                     ->first('total_price');
 
-                if ($queryGetBill->count() > 0):
+                if ($queryGetBill != null):
                     $updateStatus = DB::table('bill')
                         ->where('billid', '=', $billid)
                         ->update([

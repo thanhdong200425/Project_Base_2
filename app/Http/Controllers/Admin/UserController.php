@@ -250,4 +250,21 @@ class UserController extends Controller
             'data' => $result
         ]);
     }
+
+    public function deleteAProduct(Request $request): JsonResponse
+    {
+        $status = DB::table('product')
+                ->where('productid', '=', $request->productid)
+                ->delete();
+        
+        if ($status != 0):
+            return response()->json([
+                'status' => true
+            ]);
+        endif;
+
+        return response()->json([
+            'status' => false
+        ]);
+    }
 }
