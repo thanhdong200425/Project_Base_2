@@ -432,7 +432,7 @@ class UserController extends Controller
 
             foreach ($queryGetBillDetail as $item):
                 $queryGetBill = DB::table('bill')
-                    ->where('billid', '=', $$request->billid)
+                    ->where('billid', '=', $request->billid)
                     ->first('total_price');
 
                 if ($queryGetBill != null):
