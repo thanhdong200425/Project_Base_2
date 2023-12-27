@@ -434,8 +434,7 @@ class UserController extends Controller
                     ->where('billid', '=', $billid)
                     ->get('total_price');
 
-                // dd($queryGetBill, $queryGetBill[0]->total_price, $item->quantity);
-                if ($queryGetBill != null):
+                if ($queryGetBill->count() > 0):
                     $updateStatus = DB::table('bill')
                         ->where('billid', '=', $billid)
                         ->update([
@@ -445,7 +444,7 @@ class UserController extends Controller
                 endif;
             endforeach;
             if ($updateStatus != 0):
-                $delete = $this->delete($request->userid, $request->data);
+                $delete = $this->deleteS($request->userid, $request->data);
                 if ($delete):
                     return response()->json([
                         'status' => true
@@ -459,7 +458,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function delete($userid, $data)
+    public function deleteS($userid, $data)
     {
         foreach ($data as $item):
             $deleteCart = DB::table('cart')
