@@ -432,13 +432,13 @@ class UserController extends Controller
             foreach ($queryGetBillDetail as $item):
                 $queryGetBill = DB::table('bill')
                     ->where('billid', '=', $billid)
-                    ->get('total_price');
+                    ->first('total_price');
 
-                if ($queryGetBill->count() > 0):
+                if ($queryGetBill != null):
                     $updateStatus = DB::table('bill')
                         ->where('billid', '=', $billid)
                         ->update([
-                            'total_price' => $queryGetBill[0]->total_price + $item->quantity * $item->price,
+                            'total_price' => $queryGetBill->total_price + $item->quantity * $item->price,
                             'payment_method' => $request->payment_method
                         ]);
                 endif;
