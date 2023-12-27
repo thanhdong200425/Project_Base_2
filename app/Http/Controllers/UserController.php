@@ -467,9 +467,6 @@ class UserController extends Controller
                 ->delete();
         endforeach;
 
-        if ($deleteCart != 0):
-            return true;
-        endif;
-        return false;
+        return true;
     }
 }
