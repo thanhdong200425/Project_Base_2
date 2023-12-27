@@ -422,14 +422,13 @@ class UserController extends Controller
     {
         $queryGetBillDetail = DB::table('billdetail')
             ->where('bill.userid', '=', $request->userid)
+            ->where('bill.billid', '=', $request->billid)
             ->join('bill', 'billdetail.billid', '=', 'bill.billid')
             ->get([
                 'billdetail.billid', 'billdetail.quantity', 'billdetail.price'
             ]);
 
-        if ($queryGetBillDetail->count() > 0):
-            // $billid = $queryGetBillDetail[0]->billid;
-
+        if ($queryGetBillDetail->count() > 0):            
             foreach ($queryGetBillDetail as $item):
                 $queryGetBill = DB::table('bill')
                     ->where('billid', '=', $request->billid)
