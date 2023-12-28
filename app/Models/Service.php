@@ -16,7 +16,8 @@ class Service extends Model
         'slug',
         'icon',
         'cost',
-        'descr',
+        'dersc',
+        'content',
         'created_at',
         'updated_at'
     ];

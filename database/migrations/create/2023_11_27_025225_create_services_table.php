@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('icon')->nullable();
             $table->float('cost')->nullable();
             $table->text('content')->nullable();
-            $table->text('descr')->nullable();
+            $table->text('dersc')->nullable();
             $table->timestamps();
             $table->engine = 'InnoDB';
         });

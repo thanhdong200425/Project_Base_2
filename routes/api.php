@@ -70,7 +70,11 @@ use App\Http\Controllers\Admin\BillController;
         +) Cập nhật sản phẩm (ok)
         +) Thêm sản phẩm (ok)
         +) Duyệt bill (ok)
-        +) Lấy danh sách toàn bộ hóa đơn chưa duyệt của tất cả user (doing)
+        +) Lấy danh sách toàn bộ hóa đơn chưa duyệt của tất cả user (ok)
+        +) Thêm dịch vụ (ok)
+        +) Xóa dịch vụ (ok)
+        +) Lấy danh sách dịch vụ chưa thanh toán của toàn bộ user (ok)
+        +) Duyệt trạng thái đã thanh toán dịch vụ của user (ok)
 
 
 
@@ -200,6 +204,18 @@ Route::prefix('/admin')->group(function () {
 
     // Get all the pending bill of all user
     Route::get('/get_all_pending_bills', [BillController::class, 'getAllPendingBills']);
+
+    // Add a new service
+    Route::post('/add_service', [ServiceController::class, "addService"]);
+
+    // Delete a service
+    Route::post('/delete_service', [ServiceController::class, "deleteService"]);
+
+    // Get all the unpaid service of all user
+    Route::get('/get_unpaid_service', [ServiceController::class, 'getUnpaidService']);
+
+    // Approve the user's service payment status
+    Route::patch('/approve_payment_status', [ServiceController::class, 'approvePaymentStatus']);
 });
 
 

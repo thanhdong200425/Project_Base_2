@@ -171,5 +171,25 @@ ADMIN
   +) Get all the pending bill of all user
           -) Route: http://127.0.0.1:8000/api/admin/get_all_pending_bills
           -) Input: none
-          -) Method: GET         
+          -) Method: GET       
+
+  +) Add a new service
+          -) Route: http://127.0.0.1:8000/api/admin/add_service
+          -) Input: "name", "slug", "icon", "dersc", "content", "cost", "teamid", "created_at"
+          -) Method: POST
+
+  +) Delete a service
+          -) Route: http://127.0.0.1:8000/api/admin/delete_service
+          -) Input "serviceid"
+          -) Method: POST
+
+  +) Get all the unpaid service of all user
+         -) Route: http://127.0.0.1:8000/api/admin/get_unpaid_service
+         -) Input: none
+         -) Method: GET
+
+  +) Approve the user's service payment status
+         -) Route: http://127.0.0.1:8000/api/admin/approve_payment_status
+         -) Input: 'userid' and 'serviceid'
+         -) Method: PATCH
 }
