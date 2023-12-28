@@ -438,7 +438,7 @@ class UserController extends Controller
                     $updateStatus = DB::table('bill')
                         ->where('billid', '=', $request->billid)
                         ->update([
-                            'total_price' => $queryGetBill->total_price,
+                            'total_price' => $queryGetBill->total_price + $item->price,
                             'payment_method' => $request->payment_method
                         ]);
                 endif;
