@@ -139,18 +139,20 @@ class BillController extends Controller
                     "payment_method" => $item->payment_method,
                     "total_price" => $item->total_price,
                     "created_at" => $item->created_at,
-                    "products" => [
-                        "product_name" => $item->product_name,
-                        "productid" => $item->productid,
-                        "quantity" => $item->quantity,
-                        "price" => $item->price,
-                    ],
+                    "products" => [],
                     "user" => [
                         "fullname" => $item->fullname,
                         "email" => $item->email
                     ]
                 ];
             endif;
+
+            $result[$billid]['products'][] = [
+                "product_name" => $item->product_name,
+                "productid" => $item->productid,
+                "quantity" => $item->quantity,
+                "price" => $item->price,
+            ];
 
         endforeach;
 
