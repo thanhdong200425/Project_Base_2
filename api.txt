@@ -152,4 +152,24 @@ ADMIN
           -) Route: http://127.0.0.1:8000/api/admin/delete_product
           -) Input: 'productid'
           -) Method: POST
+
+  +) Update a product
+          -) Route: http://127.0.0.1:8000/api/admin/update_product
+          -) Input: 'productid'
+          -) Method: PUT
+
+  +) Add a new product
+          -) Route: http://127.0.0.1:8000/api/admin/add_product
+          -) Input: all the attribute in "product" table such as: "color", "quantity", ..etc.
+          -) Method: POST
+      
+  +) Approve a bill
+          -) Route: http://127.0.0.1:8000/api/admin/approve_bill
+          -) Input: 'billid'
+          -) Method: PATCH
+
+  +) Get all the pending bill of all user
+          -) Route: http://127.0.0.1:8000/api/admin/get_all_pending_bills
+          -) Input: none
+          -) Method: GET         
 }

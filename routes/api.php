@@ -66,9 +66,11 @@ use App\Http\Controllers\Admin\BillController;
         +) Lấy sản phẩm trong billdetail của 1 user (ok)
         +) Tiến hành mua hàng (ok)
         +) Giao diện thanh toán (ok)
-        +) Xóa sản phẩm (doing)
-        +) Cập nhật sản phẩm (doing)
-        +) 
+        +) Xóa sản phẩm (ok)
+        +) Cập nhật sản phẩm (ok)
+        +) Thêm sản phẩm (ok)
+        +) Duyệt bill (ok)
+        +) Lấy danh sách toàn bộ hóa đơn chưa duyệt của tất cả user (doing)
 
 
 
@@ -185,7 +187,19 @@ Route::prefix('/admin')->group(function () {
     Route::get('/list_competent_personnel', [AdminUserController::class, 'getCompetentPersonnels']);
 
     // Delete a product
-    Route::post('/delete_product', [AdminUserController::class, 'deleteAProduct'] );
+    Route::post('/delete_product', [ProductController::class, 'deleteAProduct'] );
+
+    // Update a product
+    Route::put('/update_product', [ProductController::class, 'updateProduct']);
+
+    // Add a new product
+    Route::post('/add_product', [ProductController::class, 'addProduct']);
+
+    // Approve a bill
+    Route::patch('/approve_bill', [BillController::class, 'approveBill']);
+
+    // Get all the pending bill of all user
+    Route::get('/get_all_pending_bills', [BillController::class, 'getAllPendingBills']);
 });
 
 

@@ -314,7 +314,7 @@ class UserController extends Controller
         if ($data->count() == 0):
             return response()->json([
                 'status' => false,
-                'data' => []
+                'data' => 0
             ]);
         endif;
 
@@ -438,7 +438,7 @@ class UserController extends Controller
                     $updateStatus = DB::table('bill')
                         ->where('billid', '=', $request->billid)
                         ->update([
-                            'total_price' => $queryGetBill->total_price + $item->quantity * $item->price,
+                            'total_price' => $queryGetBill->total_price,
                             'payment_method' => $request->payment_method
                         ]);
                 endif;
@@ -460,9 +460,12 @@ class UserController extends Controller
 
     public function deleteS($userid, $data)
     {
+        unset($data[0]);
+        $data = array_values($data);
         foreach ($data as $item):
+            $productid = $item['id'];
             $deleteCart = DB::table('cart')
-                ->where('productid', '=', $item['id'])
+                ->where('productid', '=', $productid)
                 ->where('userid', '=', $userid)
                 ->delete();
         endforeach;
