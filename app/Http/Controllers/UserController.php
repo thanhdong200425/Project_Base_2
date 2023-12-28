@@ -332,7 +332,7 @@ class UserController extends Controller
 
         if ($data == 0):
             return response()->json([
-                'status' => false,
+                'status' => true,
                 'data' => 0
             ]);
         endif;

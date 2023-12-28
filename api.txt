@@ -192,4 +192,45 @@ ADMIN
          -) Route: http://127.0.0.1:8000/api/admin/approve_payment_status
          -) Input: 'userid' and 'serviceid'
          -) Method: PATCH
+
+  +) Count the quantity of expert_teams
+        -) Route: http://127.0.0.1:8000/api/admin/quantity_expert_teams
+        -) Input: none
+        -) Method: GET
+
+  +) Count the quantity of users
+        -) Route: http://127.0.0.1:8000/api/admin/quantity_users
+        -) Input: none
+        -) Method: GET
+
+  +) Count the quantity of products
+        -) Route: http://127.0.0.1:8000/api/admin/quantity_products
+        -) Input: none
+        -) Method: GET
+
+  +) Count the quantity of services
+        -) Route: http://127.0.0.1:8000/api/admin/quantity_services
+        -) Input: none
+        -) Method: GET
+
+  +) Count the quantity of pending bill
+        -) Route: http://127.0.0.1:8000/api/admin/quantity_pending_bills
+        -) Input: none
+        -) Method: GET
+
+  +) Count the quantity of pending service
+        -) Route: http://127.0.0.1:8000/api/admin/quantity_pending_services
+        -) Input: none
+        -) Method: GET
+
+  +) Count the quantity payment service that is pending approval
+        -) Route: http://127.0.0.1:8000/api/admin/quantity_pending_paid_services
+        -) Input: none
+        -) Method: GET
+
+  +) Update service
+        -) Route: http://127.0.0.1:8000/api/admin/update_a_service
+        -) Input: 'serviceid', 'name', 'slug', 'icon', 'dersc', 'content', 'cost', 'teamid'
+        -) Method: PUT
+
 }

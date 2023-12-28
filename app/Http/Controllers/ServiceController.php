@@ -100,7 +100,7 @@ class ServiceController extends Controller
                 "payment_status" => 1,
                 "updated_at" => date("Y-m-d H:i:s")
             ]);
-        
+
         if ($data != 0):
             return response()->json([
                 "status" => true,
@@ -111,5 +111,33 @@ class ServiceController extends Controller
             "status" => false
         ]);
 
+    }
+
+    public function updateService(Request $request): JsonResponse
+    {
+        $data = DB::table('services')
+            ->where('id', '=', $request->serviceid)
+            ->update([
+                'name' => $request->name,
+                'slug' => $request->slug,
+                'icon' => $request->icon,
+                'dersc' => $request->dersc,
+                'content' => $request->content,
+                'cost' => $request->cost,
+                'teamid' => $request->team_id,
+                'update_at' => date("Y-m-d H:i:s")
+            ]);
+
+        if ($data != 0):
+            return response()->json([
+                'status' => true,
+                'data' => 1
+            ]);
+        endif;
+
+        return response()->json([
+            "status" => false,
+            "data" => 0
+        ]);
     }
 }

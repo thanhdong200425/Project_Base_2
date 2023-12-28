@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CountController;
 use App\Http\Controllers\PetController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
@@ -75,6 +76,7 @@ use App\Http\Controllers\Admin\BillController;
         +) Xóa dịch vụ (ok)
         +) Lấy danh sách dịch vụ chưa thanh toán của toàn bộ user (ok)
         +) Duyệt trạng thái đã thanh toán dịch vụ của user (ok)
+
 
 
 
@@ -216,6 +218,30 @@ Route::prefix('/admin')->group(function () {
 
     // Approve the user's service payment status
     Route::patch('/approve_payment_status', [ServiceController::class, 'approvePaymentStatus']);
+
+    // Count the quantity of expert_teams
+    Route::get('/quantity_expert_teams', [CountController::class, 'getExpertTeam']);
+
+    // Count the quantity of users
+    Route::get('/quantity_users', [CountController::class, 'getUser']);
+
+    // Count the quantity of products
+    Route::get('/quantity_products', [CountController::class, 'getProduct']);
+
+    // Count the quantity of services
+    Route::get('/quantity_services', [CountController::class, 'getService']);
+
+    // Count the quantity of services
+    Route::get('/quantity_pending_bills', [CountController::class, 'getPendingBill']);
+
+    // Count the quantity of services
+    Route::get('/quantity_pending_services', [CountController::class, 'getPendingService']);
+
+    // Count the quantity of services
+    Route::get('/quantity_pending_paid_services', [CountController::class, 'getPendingPaidService']);
+
+    // Update service
+    Route::put('/update_a_service', [ServiceController::class, 'updateService']);
 });
 
 
