@@ -28,6 +28,7 @@ class BillController extends Controller
         endif;
 
         $resultArray = [];
+
         foreach ($result as $item):
             $billid = $item->billid;
             if (empty($resultArray[$billid])):
@@ -35,17 +36,20 @@ class BillController extends Controller
                     "payment_method" => $item->payment_method,
                     "total_price" => $item->total_price,
                     "created_at" => $item->created_at,
-                    "products" => [
-                        "productid" => $item->productid,
-                        "quantity" => $item->quantity,
-                        "thumpnail2" => $item->thumpnail2,
-                        "color" => $item->color,
-                        "dimensions" => $item->dimensions,
-                        "price" => $item->price,
-                        "product_name" => $item->product_name
-                    ]
+                    "products" => []
                 ];
             endif;
+
+            $resultArray[$billid]['products'][] = [
+                "productid" => $item->productid,
+                "quantity" => $item->quantity,
+                "thumpnail2" => $item->thumpnail2,
+                "color" => $item->color,
+                "dimensions" => $item->dimensions,
+                "price" => $item->price,
+                "product_name" => $item->product_name
+            ];
+
         endforeach;
 
         return $resultArray;
