@@ -26,7 +26,8 @@ class User extends Model implements Authenticatable
         'contact_twitter',
         'contact_linkedin',
         'contact_pinterest',
-        'about_content'
+        'about_content',
+        'delivery_address'
     ];
 
     protected $hidden = ['password', 'created_at', 'updated_at'];
